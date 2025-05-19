@@ -22,18 +22,14 @@ class XMLProcessor
     public const PROCESSING_CONTINUE = 1;
     public const PROCESSING_STOP = 2;
 
-    /** @var \Box\Spout\Reader\Wrapper\XMLReader The XMLReader object that will help read sheet's XML data */
-    protected $xmlReader;
-
     /** @var array Registered callbacks */
     private $callbacks = [];
 
     /**
      * @param \Box\Spout\Reader\Wrapper\XMLReader $xmlReader XMLReader object
      */
-    public function __construct($xmlReader)
+    public function __construct(protected $xmlReader)
     {
-        $this->xmlReader = $xmlReader;
     }
 
     /**
@@ -73,7 +69,7 @@ class XMLProcessor
     {
         $callbackObject = $callback[0];
         $callbackMethodName = $callback[1];
-        $reflectionMethod = new \ReflectionMethod(\get_class($callbackObject), $callbackMethodName);
+        $reflectionMethod = new \ReflectionMethod($callbackObject::class, $callbackMethodName);
         $reflectionMethod->setAccessible(true);
 
         return [
@@ -130,7 +126,7 @@ class XMLProcessor
         }
 
         // Using isset here because it is way faster than array_key_exists...
-        return isset($this->callbacks[$callbackKeyToUse]) ? $this->callbacks[$callbackKeyToUse] : null;
+        return $this->callbacks[$callbackKeyToUse] ?? null;
     }
 
     /**

@@ -29,12 +29,6 @@ class FileSystemHelper extends \Box\Spout\Common\Helper\FileSystemHelper impleme
     public const WORKBOOK_RELS_XML_FILE_NAME = 'workbook.xml.rels';
     public const STYLES_XML_FILE_NAME = 'styles.xml';
 
-    /** @var ZipHelper Helper to perform tasks with Zip archive */
-    private $zipHelper;
-
-    /** @var \Box\Spout\Common\Helper\Escaper\XLSX Used to escape XML data */
-    private $escaper;
-
     /** @var string Path to the root folder inside the temp folder where the files to create the XLSX will be stored */
     private $rootFolder;
 
@@ -58,11 +52,9 @@ class FileSystemHelper extends \Box\Spout\Common\Helper\FileSystemHelper impleme
      * @param ZipHelper $zipHelper Helper to perform tasks with Zip archive
      * @param \Box\Spout\Common\Helper\Escaper\XLSX $escaper Used to escape XML data
      */
-    public function __construct($baseFolderPath, $zipHelper, $escaper)
+    public function __construct($baseFolderPath, private $zipHelper, private $escaper)
     {
         parent::__construct($baseFolderPath);
-        $this->zipHelper = $zipHelper;
-        $this->escaper = $escaper;
     }
 
     /**

@@ -8,7 +8,7 @@ use Box\Spout\Common\Helper\CellTypeHelper;
 /**
  * Class Cell
  */
-class Cell
+class Cell implements \Stringable
 {
     /**
      * Numeric cell type (whole numbers, fractional numbers, dates)
@@ -68,7 +68,7 @@ class Cell
      * @param mixed|null $value
      * @param Style|null $style
      */
-    public function __construct($value, Style $style = null)
+    public function __construct($value, ?Style $style = null)
     {
         $this->setValue($value);
         $this->setStyle($style);
@@ -209,7 +209,7 @@ class Cell
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->getValue();
     }

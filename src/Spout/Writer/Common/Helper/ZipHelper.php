@@ -16,15 +16,11 @@ class ZipHelper
     public const EXISTING_FILES_SKIP = 'skip';
     public const EXISTING_FILES_OVERWRITE = 'overwrite';
 
-    /** @var InternalEntityFactory Factory to create entities */
-    private $entityFactory;
-
     /**
      * @param InternalEntityFactory $entityFactory Factory to create entities
      */
-    public function __construct($entityFactory)
+    public function __construct(private $entityFactory)
     {
-        $this->entityFactory = $entityFactory;
     }
 
     /**

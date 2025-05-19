@@ -18,15 +18,11 @@ use Box\Spout\Reader\CSV\SheetIterator;
  */
 class InternalEntityFactory implements InternalEntityFactoryInterface
 {
-    /** @var HelperFactory */
-    private $helperFactory;
-
     /**
      * @param HelperFactory $helperFactory
      */
-    public function __construct(HelperFactory $helperFactory)
+    public function __construct(private readonly HelperFactory $helperFactory)
     {
-        $this->helperFactory = $helperFactory;
     }
 
     /**
@@ -89,9 +85,7 @@ class InternalEntityFactory implements InternalEntityFactoryInterface
      */
     public function createRowFromArray(array $cellValues = [])
     {
-        $cells = \array_map(function ($cellValue) {
-            return $this->createCell($cellValue);
-        }, $cellValues);
+        $cells = \array_map(fn($cellValue) => $this->createCell($cellValue), $cellValues);
 
         return $this->createRow($cells);
     }

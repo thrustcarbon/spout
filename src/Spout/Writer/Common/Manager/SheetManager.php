@@ -21,17 +21,13 @@ class SheetManager
     /** @var array Associative array [WORKBOOK_ID] => [[SHEET_INDEX] => [SHEET_NAME]] keeping track of sheets' name to enforce uniqueness per workbook */
     private static $SHEETS_NAME_USED = [];
 
-    /** @var StringHelper */
-    private $stringHelper;
-
     /**
      * SheetManager constructor.
      *
      * @param StringHelper $stringHelper
      */
-    public function __construct(StringHelper $stringHelper)
+    public function __construct(private readonly StringHelper $stringHelper)
     {
-        $this->stringHelper = $stringHelper;
     }
 
     /**

@@ -115,15 +115,15 @@ class XMLReader extends \XMLReader
      * Move cursor to next node skipping all subtrees
      * @see \XMLReader::next
      *
-     * @param string|null $localName The name of the next node to move to
+     * @param string|null $name The name of the next node to move to
      * @throws \Box\Spout\Reader\Exception\XMLProcessingException If an error/warning occurred
      * @return bool TRUE on success or FALSE on failure
      */
-    public function next($localName = null)
+    public function next(?string $name = null): bool
     {
         $this->useXMLInternalErrors();
 
-        $wasNextSuccessful = parent::next($localName);
+        $wasNextSuccessful = parent::next($name);
 
         $this->resetXMLInternalErrorsSettingAndThrowIfXMLErrorOccured();
 
@@ -158,7 +158,7 @@ class XMLReader extends \XMLReader
         // In some cases, the node has a prefix (for instance, "<sheet>" can also be "<x:sheet>").
         // So if the given node name does not have a prefix, we need to look at the unprefixed name ("localName").
         // @see https://github.com/box/spout/issues/233
-        $hasPrefix = (\strpos($nodeName, ':') !== false);
+        $hasPrefix = (str_contains($nodeName, ':'));
         $currentNodeName = ($hasPrefix) ? $this->name : $this->localName;
 
         return ($this->nodeType === $nodeType && $currentNodeName === $nodeName);

@@ -108,7 +108,7 @@ class CellValueFormatterTest extends TestCase
                 $this->assertInstanceOf(\DateTime::class, $result);
                 $this->assertSame($expectedDateAsString, $result->format('Y-m-d H:i:s'));
             }
-        } catch (InvalidValueException $exception) {
+        } catch (InvalidValueException) {
             // do nothing
         }
     }

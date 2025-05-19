@@ -24,19 +24,14 @@ class EncodingHelper
     public const BOM_UTF32_LE = "\xFF\xFE\x00\x00";
     public const BOM_UTF32_BE = "\x00\x00\xFE\xFF";
 
-    /** @var \Box\Spout\Common\Helper\GlobalFunctionsHelper Helper to work with global functions */
-    protected $globalFunctionsHelper;
-
     /** @var array Map representing the encodings supporting BOMs (key) and their associated BOM (value) */
     protected $supportedEncodingsWithBom;
 
     /**
      * @param \Box\Spout\Common\Helper\GlobalFunctionsHelper $globalFunctionsHelper
      */
-    public function __construct($globalFunctionsHelper)
+    public function __construct(protected $globalFunctionsHelper)
     {
-        $this->globalFunctionsHelper = $globalFunctionsHelper;
-
         $this->supportedEncodingsWithBom = [
             self::ENCODING_UTF8     => self::BOM_UTF8,
             self::ENCODING_UTF16_LE => self::BOM_UTF16_LE,
@@ -61,7 +56,7 @@ class EncodingHelper
             $bomUsed = $this->supportedEncodingsWithBom[$encoding];
 
             // we skip the N first bytes
-            $byteOffsetToSkipBom = \strlen($bomUsed);
+            $byteOffsetToSkipBom = \strlen((string) $bomUsed);
         }
 
         return $byteOffsetToSkipBom;
@@ -82,7 +77,7 @@ class EncodingHelper
 
         if (\array_key_exists($encoding, $this->supportedEncodingsWithBom)) {
             $potentialBom = $this->supportedEncodingsWithBom[$encoding];
-            $numBytesInBom = \strlen($potentialBom);
+            $numBytesInBom = \strlen((string) $potentialBom);
 
             $hasBOM = ($this->globalFunctionsHelper->fgets($filePointer, $numBytesInBom + 1) === $potentialBom);
         }

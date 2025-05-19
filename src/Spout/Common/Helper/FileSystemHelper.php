@@ -127,7 +127,7 @@ class FileSystemHelper implements FileSystemHelperInterface
         if (!$this->baseFolderRealPath) {
             throw new IOException("The base folder path is invalid: {$this->baseFolderRealPath}");
         }
-        $isInBaseFolder = (\strpos($operationFolderRealPath, $this->baseFolderRealPath) === 0);
+        $isInBaseFolder = (str_starts_with($operationFolderRealPath, $this->baseFolderRealPath));
         if (!$isInBaseFolder) {
             throw new IOException("Cannot perform I/O operation outside of the base folder: {$this->baseFolderRealPath}");
         }

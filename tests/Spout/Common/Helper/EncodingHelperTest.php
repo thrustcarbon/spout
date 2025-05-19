@@ -67,14 +67,14 @@ class EncodingHelperTest extends TestCase
     {
         $this->expectException(EncodingConversionException::class);
 
-        $helperStub = $this->getMockBuilder('\Box\Spout\Common\Helper\GlobalFunctionsHelper')
+        $helperStub = $this->getMockBuilder(\Box\Spout\Common\Helper\GlobalFunctionsHelper::class)
                         ->onlyMethods(['iconv', 'mb_convert_encoding'])
                         ->getMock();
         $helperStub->method('iconv')->willReturn(false);
         $helperStub->method('mb_convert_encoding')->willReturn(false);
 
         /** @var EncodingHelper|\PHPUnit\Framework\MockObject\MockObject|\PHPUnit\Framework\MockObject\MockObject $encodingHelperStub */
-        $encodingHelperStub = $this->getMockBuilder('\Box\Spout\Common\Helper\EncodingHelper')
+        $encodingHelperStub = $this->getMockBuilder(\Box\Spout\Common\Helper\EncodingHelper::class)
                         ->setConstructorArgs([$helperStub])
                         ->onlyMethods(['canUseIconv', 'canUseMbString'])
                         ->getMock();
@@ -92,7 +92,7 @@ class EncodingHelperTest extends TestCase
         $this->expectException(EncodingConversionException::class);
 
         /** @var EncodingHelper|\PHPUnit\Framework\MockObject\MockObject|\PHPUnit\Framework\MockObject\MockObject $encodingHelperStub */
-        $encodingHelperStub = $this->getMockBuilder('\Box\Spout\Common\Helper\EncodingHelper')
+        $encodingHelperStub = $this->getMockBuilder(\Box\Spout\Common\Helper\EncodingHelper::class)
                         ->disableOriginalConstructor()
                         ->onlyMethods(['canUseIconv', 'canUseMbString'])
                         ->getMock();
@@ -111,7 +111,7 @@ class EncodingHelperTest extends TestCase
     public function testAttemptConversionToUTF8ShouldReturnReencodedString($shouldUseIconv)
     {
         /** @var EncodingHelper|\PHPUnit\Framework\MockObject\MockObject $encodingHelperStub */
-        $encodingHelperStub = $this->getMockBuilder('\Box\Spout\Common\Helper\EncodingHelper')
+        $encodingHelperStub = $this->getMockBuilder(\Box\Spout\Common\Helper\EncodingHelper::class)
                         ->setConstructorArgs([new GlobalFunctionsHelper()])
                         ->onlyMethods(['canUseIconv', 'canUseMbString'])
                         ->getMock();
@@ -130,7 +130,7 @@ class EncodingHelperTest extends TestCase
     public function testAttemptConversionToUTF8ShouldBeNoopWhenTargetIsUTF8()
     {
         /** @var EncodingHelper|\PHPUnit\Framework\MockObject\MockObject|\PHPUnit\Framework\MockObject\MockObject $encodingHelperStub */
-        $encodingHelperStub = $this->getMockBuilder('\Box\Spout\Common\Helper\EncodingHelper')
+        $encodingHelperStub = $this->getMockBuilder(\Box\Spout\Common\Helper\EncodingHelper::class)
                         ->disableOriginalConstructor()
                         ->onlyMethods(['canUseIconv'])
                         ->getMock();
@@ -150,14 +150,14 @@ class EncodingHelperTest extends TestCase
     {
         $this->expectException(EncodingConversionException::class);
 
-        $helperStub = $this->getMockBuilder('\Box\Spout\Common\Helper\GlobalFunctionsHelper')
+        $helperStub = $this->getMockBuilder(\Box\Spout\Common\Helper\GlobalFunctionsHelper::class)
                         ->onlyMethods(['iconv', 'mb_convert_encoding'])
                         ->getMock();
         $helperStub->method('iconv')->willReturn(false);
         $helperStub->method('mb_convert_encoding')->willReturn(false);
 
         /** @var EncodingHelper|\PHPUnit\Framework\MockObject\MockObject|\PHPUnit\Framework\MockObject\MockObject $encodingHelperStub */
-        $encodingHelperStub = $this->getMockBuilder('\Box\Spout\Common\Helper\EncodingHelper')
+        $encodingHelperStub = $this->getMockBuilder(\Box\Spout\Common\Helper\EncodingHelper::class)
                         ->setConstructorArgs([$helperStub])
                         ->onlyMethods(['canUseIconv', 'canUseMbString'])
                         ->getMock();
@@ -175,7 +175,7 @@ class EncodingHelperTest extends TestCase
         $this->expectException(EncodingConversionException::class);
 
         /** @var EncodingHelper|\PHPUnit\Framework\MockObject\MockObject|\PHPUnit\Framework\MockObject\MockObject $encodingHelperStub */
-        $encodingHelperStub = $this->getMockBuilder('\Box\Spout\Common\Helper\EncodingHelper')
+        $encodingHelperStub = $this->getMockBuilder(\Box\Spout\Common\Helper\EncodingHelper::class)
                         ->disableOriginalConstructor()
                         ->onlyMethods(['canUseIconv', 'canUseMbString'])
                         ->getMock();
@@ -194,7 +194,7 @@ class EncodingHelperTest extends TestCase
     public function testAttemptConversionFromUTF8ShouldReturnReencodedString($shouldUseIconv)
     {
         /** @var EncodingHelper|\PHPUnit\Framework\MockObject\MockObject $encodingHelperStub */
-        $encodingHelperStub = $this->getMockBuilder('\Box\Spout\Common\Helper\EncodingHelper')
+        $encodingHelperStub = $this->getMockBuilder(\Box\Spout\Common\Helper\EncodingHelper::class)
                         ->setConstructorArgs([new GlobalFunctionsHelper()])
                         ->onlyMethods(['canUseIconv', 'canUseMbString'])
                         ->getMock();
@@ -213,7 +213,7 @@ class EncodingHelperTest extends TestCase
     public function testAttemptConversionFromUTF8ShouldBeNoopWhenTargetIsUTF8()
     {
         /** @var EncodingHelper|\PHPUnit\Framework\MockObject\MockObject $encodingHelperStub */
-        $encodingHelperStub = $this->getMockBuilder('\Box\Spout\Common\Helper\EncodingHelper')
+        $encodingHelperStub = $this->getMockBuilder(\Box\Spout\Common\Helper\EncodingHelper::class)
                         ->disableOriginalConstructor()
                         ->onlyMethods(['canUseIconv'])
                         ->getMock();

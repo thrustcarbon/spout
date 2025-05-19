@@ -8,13 +8,7 @@
 
 ## 🪦 Archived project 🪦 
 
-This project has been archived and is no longer maintained. No bug fix and no additional features will be added.<br>
-You won't be able to submit new issues or pull requests, and no additional features will be added
-
-You can still use Spout as is in your projects though :)
-
-> Thanks to everyone who contributed to this project, from a typo fix to the new cool feature.<br>
-> It was great to see the involvement of this community!
+This project was archived and is no longer maintained. We decided to fork the project here at Thrust Carbon because moving off of it was too big a task.
 
 <br>
 

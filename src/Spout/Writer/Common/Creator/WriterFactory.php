@@ -49,13 +49,12 @@ class WriterFactory
      */
     public static function createFromType($writerType)
     {
-        switch ($writerType) {
-            case Type::CSV: return self::createCSVWriter();
-            case Type::XLSX: return self::createXLSXWriter();
-            case Type::ODS: return self::createODSWriter();
-            default:
-                throw new UnsupportedTypeException('No writers supporting the given type: ' . $writerType);
-        }
+        return match ($writerType) {
+            Type::CSV => self::createCSVWriter(),
+            Type::XLSX => self::createXLSXWriter(),
+            Type::ODS => self::createODSWriter(),
+            default => throw new UnsupportedTypeException('No writers supporting the given type: ' . $writerType),
+        };
     }
 
     /**

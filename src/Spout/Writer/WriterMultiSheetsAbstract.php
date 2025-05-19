@@ -21,9 +21,6 @@ use Box\Spout\Writer\Exception\WriterNotOpenedException;
  */
 abstract class WriterMultiSheetsAbstract extends WriterAbstract
 {
-    /** @var ManagerFactoryInterface */
-    private $managerFactory;
-
     /** @var WorkbookManagerInterface|null */
     private $workbookManager;
 
@@ -37,10 +34,9 @@ abstract class WriterMultiSheetsAbstract extends WriterAbstract
         OptionsManagerInterface $optionsManager,
         GlobalFunctionsHelper $globalFunctionsHelper,
         HelperFactory $helperFactory,
-        ManagerFactoryInterface $managerFactory
+        private readonly ManagerFactoryInterface $managerFactory
     ) {
         parent::__construct($optionsManager, $globalFunctionsHelper, $helperFactory);
-        $this->managerFactory = $managerFactory;
     }
 
     /**

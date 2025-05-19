@@ -28,20 +28,8 @@ class SheetIterator implements IteratorInterface
     public const XML_ATTRIBUTE_TABLE_STYLE_NAME = 'table:style-name';
     public const XML_ATTRIBUTE_TABLE_DISPLAY = 'table:display';
 
-    /** @var string Path of the file to be read */
-    protected $filePath;
-
-    /** @var \Box\Spout\Common\Manager\OptionsManagerInterface Reader's options manager */
-    protected $optionsManager;
-
-    /** @var InternalEntityFactory Factory to create entities */
-    protected $entityFactory;
-
     /** @var XMLReader The XMLReader object that will help read sheet's XML data */
     protected $xmlReader;
-
-    /** @var \Box\Spout\Common\Helper\Escaper\ODS Used to unescape XML data */
-    protected $escaper;
 
     /** @var bool Whether there are still at least a sheet to be read */
     protected $hasFoundSheet;
@@ -62,14 +50,10 @@ class SheetIterator implements IteratorInterface
      * @param SettingsHelper $settingsHelper Helper to get data from "settings.xml"
      * @param InternalEntityFactory $entityFactory Factory to create entities
      */
-    public function __construct($filePath, $optionsManager, $escaper, $settingsHelper, $entityFactory)
+    public function __construct(protected $filePath, protected $optionsManager, protected $escaper, $settingsHelper, protected $entityFactory)
     {
-        $this->filePath = $filePath;
-        $this->optionsManager = $optionsManager;
-        $this->entityFactory = $entityFactory;
-        $this->xmlReader = $entityFactory->createXMLReader();
-        $this->escaper = $escaper;
-        $this->activeSheetName = $settingsHelper->getActiveSheetName($filePath);
+        $this->xmlReader = $this->entityFactory->createXMLReader();
+        $this->activeSheetName = $settingsHelper->getActiveSheetName($this->filePath);
     }
 
     /**
@@ -205,9 +189,7 @@ class SheetIterator implements IteratorInterface
      */
     private function isSheetVisible($sheetStyleName)
     {
-        return isset($this->sheetsVisibility[$sheetStyleName]) ?
-            $this->sheetsVisibility[$sheetStyleName] :
-            true;
+        return $this->sheetsVisibility[$sheetStyleName] ?? true;
     }
 
     /**

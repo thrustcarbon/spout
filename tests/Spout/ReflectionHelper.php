@@ -104,7 +104,7 @@ class ReflectionHelper
         array_shift($params); // object
         array_shift($params); // methodName
 
-        $className = get_class($object);
+        $className = $object::class;
         $class = new ReflectionClass($className);
         $method = $class->getMethod($methodName);
         $method->setAccessible(true);

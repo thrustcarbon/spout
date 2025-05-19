@@ -10,15 +10,11 @@ use Box\Spout\Reader\Common\Creator\InternalEntityFactoryInterface;
  */
 class RowManager
 {
-    /** @var InternalEntityFactoryInterface Factory to create entities */
-    private $entityFactory;
-
     /**
      * @param InternalEntityFactoryInterface $entityFactory Factory to create entities
      */
-    public function __construct(InternalEntityFactoryInterface $entityFactory)
+    public function __construct(private readonly InternalEntityFactoryInterface $entityFactory)
     {
-        $this->entityFactory = $entityFactory;
     }
 
     /**

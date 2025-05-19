@@ -117,6 +117,7 @@ class StyleRegistry extends \Box\Spout\Writer\Common\Manager\Style\StyleRegistry
      * @param Style $style
      * @return Style
      */
+    #[\Override]
     public function registerStyle(Style $style)
     {
         if ($style->isRegistered()) {
@@ -209,9 +210,7 @@ class StyleRegistry extends \Box\Spout\Writer\Common\Manager\Style\StyleRegistry
      */
     public function getFillIdForStyleId($styleId)
     {
-        return (isset($this->styleIdToFillMappingTable[$styleId])) ?
-            $this->styleIdToFillMappingTable[$styleId] :
-            null;
+        return $this->styleIdToFillMappingTable[$styleId] ?? null;
     }
 
     /**
@@ -249,9 +248,7 @@ class StyleRegistry extends \Box\Spout\Writer\Common\Manager\Style\StyleRegistry
      */
     public function getBorderIdForStyleId($styleId)
     {
-        return (isset($this->styleIdToBorderMappingTable[$styleId])) ?
-            $this->styleIdToBorderMappingTable[$styleId] :
-            null;
+        return $this->styleIdToBorderMappingTable[$styleId] ?? null;
     }
 
     /**

@@ -74,7 +74,7 @@ class StyleManager implements StyleManagerInterface
         $cellStyle = $cell->getStyle();
 
         // if the "wrap text" option is already set, no-op
-        if (!$cellStyle->hasSetWrapText() && $cell->isString() && \strpos($cell->getValue(), "\n") !== false) {
+        if (!$cellStyle->hasSetWrapText() && $cell->isString() && str_contains((string) $cell->getValue(), "\n")) {
             $cellStyle->setShouldWrapText();
 
             return new PossiblyUpdatedStyle($cellStyle, true);

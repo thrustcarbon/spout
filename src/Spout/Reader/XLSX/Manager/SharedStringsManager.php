@@ -28,24 +28,6 @@ class SharedStringsManager
     public const XML_ATTRIBUTE_XML_SPACE = 'xml:space';
     public const XML_ATTRIBUTE_VALUE_PRESERVE = 'preserve';
 
-    /** @var string Path of the XLSX file being read */
-    protected $filePath;
-
-    /** @var string Temporary folder where the temporary files to store shared strings will be stored */
-    protected $tempFolder;
-
-    /** @var WorkbookRelationshipsManager Helps retrieving workbook relationships */
-    protected $workbookRelationshipsManager;
-
-    /** @var InternalEntityFactory Factory to create entities */
-    protected $entityFactory;
-
-    /** @var HelperFactory Factory to create helpers */
-    protected $helperFactory;
-
-    /** @var CachingStrategyFactory Factory to create shared strings caching strategies */
-    protected $cachingStrategyFactory;
-
     /** @var CachingStrategyInterface The best caching strategy for storing shared strings */
     protected $cachingStrategy;
 
@@ -57,20 +39,8 @@ class SharedStringsManager
      * @param HelperFactory $helperFactory Factory to create helpers
      * @param CachingStrategyFactory $cachingStrategyFactory Factory to create shared strings caching strategies
      */
-    public function __construct(
-        $filePath,
-        $tempFolder,
-        $workbookRelationshipsManager,
-        $entityFactory,
-        $helperFactory,
-        $cachingStrategyFactory
-    ) {
-        $this->filePath = $filePath;
-        $this->tempFolder = $tempFolder;
-        $this->workbookRelationshipsManager = $workbookRelationshipsManager;
-        $this->entityFactory = $entityFactory;
-        $this->helperFactory = $helperFactory;
-        $this->cachingStrategyFactory = $cachingStrategyFactory;
+    public function __construct(protected $filePath, protected $tempFolder, protected $workbookRelationshipsManager, protected $entityFactory, protected $helperFactory, protected $cachingStrategyFactory)
+    {
     }
 
     /**
@@ -188,7 +158,7 @@ class SharedStringsManager
                 $textNodeValue = $textNode->nodeValue;
                 $shouldPreserveWhitespace = $this->shouldPreserveWhitespace($textNode);
 
-                $sharedStringValue .= ($shouldPreserveWhitespace) ? $textNodeValue : \trim($textNodeValue);
+                $sharedStringValue .= ($shouldPreserveWhitespace) ? $textNodeValue : \trim((string) $textNodeValue);
             }
         }
 

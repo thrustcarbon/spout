@@ -312,11 +312,11 @@ EOD;
      */
     private function transformCellAlignment($cellAlignment)
     {
-        switch ($cellAlignment) {
-            case CellAlignment::LEFT: return 'start';
-            case CellAlignment::RIGHT: return 'end';
-            default: return $cellAlignment;
-        }
+        return match ($cellAlignment) {
+            CellAlignment::LEFT => 'start',
+            CellAlignment::RIGHT => 'end',
+            default => $cellAlignment,
+        };
     }
 
     /**
@@ -364,9 +364,7 @@ EOD;
      */
     private function getBorderXMLContent($style)
     {
-        $borders = \array_map(function (BorderPart $borderPart) {
-            return BorderHelper::serializeBorderPart($borderPart);
-        }, $style->getBorder()->getParts());
+        $borders = \array_map(fn(BorderPart $borderPart) => BorderHelper::serializeBorderPart($borderPart), $style->getBorder()->getParts());
 
         return \sprintf(' %s ', \implode(' ', $borders));
     }

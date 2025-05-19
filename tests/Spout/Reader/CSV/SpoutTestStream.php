@@ -9,7 +9,7 @@ namespace Box\Spout\Reader\CSV;
  */
 class SpoutTestStream
 {
-    public const CLASS_NAME = __CLASS__;
+    public const CLASS_NAME = self::class;
 
     public const PATH_TO_CSV_RESOURCES = 'tests/resources/csv/';
     public const CSV_EXTENSION = '.csv';

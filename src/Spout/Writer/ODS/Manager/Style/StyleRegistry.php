@@ -20,6 +20,7 @@ class StyleRegistry extends \Box\Spout\Writer\Common\Manager\Style\StyleRegistry
      * @param Style $style The style to be registered
      * @return Style The registered style, updated with an internal ID.
      */
+    #[\Override]
     public function registerStyle(Style $style)
     {
         if ($style->isRegistered()) {

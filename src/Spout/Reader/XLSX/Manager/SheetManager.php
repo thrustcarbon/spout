@@ -36,23 +36,8 @@ class SheetManager
     /** State value to represent a hidden sheet */
     public const SHEET_STATE_HIDDEN = 'hidden';
 
-    /** @var string Path of the XLSX file being read */
-    protected $filePath;
-
-    /** @var \Box\Spout\Common\Manager\OptionsManagerInterface Reader's options manager */
-    protected $optionsManager;
-
-    /** @var \Box\Spout\Reader\XLSX\Manager\SharedStringsManager Manages shared strings */
-    protected $sharedStringsManager;
-
     /** @var \Box\Spout\Common\Helper\GlobalFunctionsHelper Helper to work with global functions */
     protected $globalFunctionsHelper;
-
-    /** @var InternalEntityFactory Factory to create entities */
-    protected $entityFactory;
-
-    /** @var \Box\Spout\Common\Helper\Escaper\XLSX Used to unescape XML data */
-    protected $escaper;
 
     /** @var array List of sheets */
     protected $sheets;
@@ -71,13 +56,8 @@ class SheetManager
      * @param InternalEntityFactory $entityFactory Factory to create entities
      * @param mixed $sharedStringsManager
      */
-    public function __construct($filePath, $optionsManager, $sharedStringsManager, $escaper, $entityFactory)
+    public function __construct(protected $filePath, protected $optionsManager, protected $sharedStringsManager, protected $escaper, protected $entityFactory)
     {
-        $this->filePath = $filePath;
-        $this->optionsManager = $optionsManager;
-        $this->sharedStringsManager = $sharedStringsManager;
-        $this->escaper = $escaper;
-        $this->entityFactory = $entityFactory;
     }
 
     /**
@@ -211,7 +191,7 @@ class SheetManager
                         $sheetDataXMLFilePath = $xmlReader->getAttribute(self::XML_ATTRIBUTE_TARGET);
 
                         // sometimes, the sheet data file path already contains "/xl/"...
-                        if (\strpos($sheetDataXMLFilePath, '/xl/') !== 0) {
+                        if (!str_starts_with((string) $sheetDataXMLFilePath, '/xl/')) {
                             $sheetDataXMLFilePath = '/xl/' . $sheetDataXMLFilePath;
                             break;
                         }

@@ -49,6 +49,7 @@ class HelperFactory extends \Box\Spout\Common\Creator\HelperFactory
     /**
      * @return StringHelper
      */
+    #[\Override]
     public function createStringHelper()
     {
         return new StringHelper();

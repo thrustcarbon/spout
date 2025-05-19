@@ -18,15 +18,11 @@ class SettingsHelper
     public const XML_ATTRIBUTE_CONFIG_NAME = 'config:name';
     public const XML_ATTRIBUTE_VALUE_ACTIVE_TABLE = 'ActiveTable';
 
-    /** @var InternalEntityFactory Factory to create entities */
-    private $entityFactory;
-
     /**
      * @param InternalEntityFactory $entityFactory Factory to create entities
      */
-    public function __construct($entityFactory)
+    public function __construct(private $entityFactory)
     {
-        $this->entityFactory = $entityFactory;
     }
 
     /**
@@ -49,7 +45,7 @@ class SettingsHelper
                     break;
                 }
             }
-        } catch (XMLProcessingException $exception) {
+        } catch (XMLProcessingException) {
             // do nothing
         }
 

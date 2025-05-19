@@ -10,20 +10,8 @@ use Box\Spout\Common\Entity\Style\Style;
  */
 class RegisteredStyle
 {
-    /**
-     * @var Style
-     */
-    private $style;
-
-    /**
-     * @var bool
-     */
-    private $isMatchingRowStyle;
-
-    public function __construct(Style $style, bool $isMatchingRowStyle)
+    public function __construct(private readonly Style $style, private readonly bool $isMatchingRowStyle)
     {
-        $this->style = $style;
-        $this->isMatchingRowStyle = $isMatchingRowStyle;
     }
 
     public function getStyle() : Style

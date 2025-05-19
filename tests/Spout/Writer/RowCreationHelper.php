@@ -25,7 +25,7 @@ trait RowCreationHelper
      * @param Style|null $rowStyle
      * @return Row
      */
-    protected function createStyledRowFromValues(array $cellValues, Style $rowStyle = null)
+    protected function createStyledRowFromValues(array $cellValues, ?Style $rowStyle = null)
     {
         return WriterEntityFactory::createRowFromArray($cellValues, $rowStyle);
     }
@@ -44,7 +44,7 @@ trait RowCreationHelper
      * @param Style|null $rowsStyle
      * @return Row[]
      */
-    protected function createStyledRowsFromValues(array $rowValues, Style $rowsStyle = null)
+    protected function createStyledRowsFromValues(array $rowValues, ?Style $rowsStyle = null)
     {
         $rows = [];
 

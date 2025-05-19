@@ -10,18 +10,14 @@ use Box\Spout\Reader\IteratorInterface;
  */
 class SheetIterator implements IteratorInterface
 {
-    /** @var Sheet The CSV unique "sheet" */
-    protected $sheet;
-
     /** @var bool Whether the unique "sheet" has already been read */
     protected $hasReadUniqueSheet = false;
 
     /**
      * @param Sheet $sheet Corresponding unique sheet
      */
-    public function __construct($sheet)
+    public function __construct(protected $sheet)
     {
-        $this->sheet = $sheet;
     }
 
     /**

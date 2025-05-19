@@ -30,14 +30,11 @@ EOD;
     /** @var int Number of shared strings already written */
     protected $numSharedStrings = 0;
 
-    /** @var Escaper\XLSX Strings escaper */
-    protected $stringsEscaper;
-
     /**
      * @param string $xlFolder Path to the "xl" folder
      * @param Escaper\XLSX $stringsEscaper Strings escaper
      */
-    public function __construct($xlFolder, $stringsEscaper)
+    public function __construct($xlFolder, protected $stringsEscaper)
     {
         $sharedStringsFilePath = $xlFolder . '/' . self::SHARED_STRINGS_FILE_NAME;
         $this->sharedStringsFilePointer = \fopen($sharedStringsFilePath, 'w');
@@ -47,8 +44,6 @@ EOD;
         // the headers is split into different parts so that we can fseek and put in the correct count and uniqueCount later
         $header = self::SHARED_STRINGS_XML_FILE_FIRST_PART_HEADER . ' ' . self::DEFAULT_STRINGS_COUNT_PART . '>';
         \fwrite($this->sharedStringsFilePointer, $header);
-
-        $this->stringsEscaper = $stringsEscaper;
     }
 
     /**

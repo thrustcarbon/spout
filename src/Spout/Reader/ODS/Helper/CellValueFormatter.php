@@ -37,12 +37,6 @@ class CellValueFormatter
     public const XML_ATTRIBUTE_CURRENCY = 'office:currency';
     public const XML_ATTRIBUTE_C = 'text:c';
 
-    /** @var bool Whether date/time values should be returned as PHP objects or be formatted as strings */
-    protected $shouldFormatDates;
-
-    /** @var \Box\Spout\Common\Helper\Escaper\ODS Used to unescape XML data */
-    protected $escaper;
-
     /** @var array List of XML nodes representing whitespaces and their corresponding value */
     private static $WHITESPACE_XML_NODES = [
         self::XML_NODE_TEXT_S => ' ',
@@ -54,10 +48,8 @@ class CellValueFormatter
      * @param bool $shouldFormatDates Whether date/time values should be returned as PHP objects or be formatted as strings
      * @param \Box\Spout\Common\Helper\Escaper\ODS $escaper Used to unescape XML data
      */
-    public function __construct($shouldFormatDates, $escaper)
+    public function __construct(protected $shouldFormatDates, protected $escaper)
     {
-        $this->shouldFormatDates = $shouldFormatDates;
-        $this->escaper = $escaper;
     }
 
     /**
@@ -72,25 +64,16 @@ class CellValueFormatter
     {
         $cellType = $node->getAttribute(self::XML_ATTRIBUTE_TYPE);
 
-        switch ($cellType) {
-            case self::CELL_TYPE_STRING:
-                return $this->formatStringCellValue($node);
-            case self::CELL_TYPE_FLOAT:
-                return $this->formatFloatCellValue($node);
-            case self::CELL_TYPE_BOOLEAN:
-                return $this->formatBooleanCellValue($node);
-            case self::CELL_TYPE_DATE:
-                return $this->formatDateCellValue($node);
-            case self::CELL_TYPE_TIME:
-                return $this->formatTimeCellValue($node);
-            case self::CELL_TYPE_CURRENCY:
-                return $this->formatCurrencyCellValue($node);
-            case self::CELL_TYPE_PERCENTAGE:
-                return $this->formatPercentageCellValue($node);
-            case self::CELL_TYPE_VOID:
-            default:
-                return '';
-        }
+        return match ($cellType) {
+            self::CELL_TYPE_STRING => $this->formatStringCellValue($node),
+            self::CELL_TYPE_FLOAT => $this->formatFloatCellValue($node),
+            self::CELL_TYPE_BOOLEAN => $this->formatBooleanCellValue($node),
+            self::CELL_TYPE_DATE => $this->formatDateCellValue($node),
+            self::CELL_TYPE_TIME => $this->formatTimeCellValue($node),
+            self::CELL_TYPE_CURRENCY => $this->formatCurrencyCellValue($node),
+            self::CELL_TYPE_PERCENTAGE => $this->formatPercentageCellValue($node),
+            default => '',
+        };
     }
 
     /**
@@ -167,7 +150,7 @@ class CellValueFormatter
         $countAttribute = $node->getAttribute(self::XML_ATTRIBUTE_C); // only defined for "<text:s>"
         $numWhitespaces = (!empty($countAttribute)) ? (int) $countAttribute : 1;
 
-        return \str_repeat(self::$WHITESPACE_XML_NODES[$node->nodeName], $numWhitespaces);
+        return \str_repeat((string) self::$WHITESPACE_XML_NODES[$node->nodeName], $numWhitespaces);
     }
 
     /**
@@ -223,7 +206,7 @@ class CellValueFormatter
             $nodeValue = $node->getAttribute(self::XML_ATTRIBUTE_DATE_VALUE);
             try {
                 $cellValue = new \DateTime($nodeValue);
-            } catch (\Exception $e) {
+            } catch (\Exception) {
                 throw new InvalidValueException($nodeValue);
             }
         }
@@ -254,7 +237,7 @@ class CellValueFormatter
             $nodeValue = $node->getAttribute(self::XML_ATTRIBUTE_TIME_VALUE);
             try {
                 $cellValue = new \DateInterval($nodeValue);
-            } catch (\Exception $e) {
+            } catch (\Exception) {
                 throw new InvalidValueException($nodeValue);
             }
         }

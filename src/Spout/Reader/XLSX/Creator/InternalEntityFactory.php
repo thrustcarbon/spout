@@ -19,20 +19,12 @@ use Box\Spout\Reader\XLSX\SheetIterator;
  */
 class InternalEntityFactory implements InternalEntityFactoryInterface
 {
-    /** @var HelperFactory */
-    private $helperFactory;
-
-    /** @var ManagerFactory */
-    private $managerFactory;
-
     /**
      * @param ManagerFactory $managerFactory
      * @param HelperFactory $helperFactory
      */
-    public function __construct(ManagerFactory $managerFactory, HelperFactory $helperFactory)
+    public function __construct(private readonly ManagerFactory $managerFactory, private readonly HelperFactory $helperFactory)
     {
-        $this->managerFactory = $managerFactory;
-        $this->helperFactory = $helperFactory;
     }
 
     /**

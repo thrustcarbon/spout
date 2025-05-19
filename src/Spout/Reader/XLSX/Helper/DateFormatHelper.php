@@ -68,7 +68,7 @@ class DateFormatHelper
         // For instance, ["Day " dd] should result in "Day 13" and we should not try to interpret "D", "a", "y"
         // By exploding the format string using double quote as a delimiter, we can get all parts
         // that must be transformed (even indexes) and all parts that must not be (odd indexes).
-        $dateFormatParts = \explode('"', $dateFormat);
+        $dateFormatParts = \explode('"', (string) $dateFormat);
 
         foreach ($dateFormatParts as $partIndex => $dateFormatPart) {
             // do not look at odd indexes

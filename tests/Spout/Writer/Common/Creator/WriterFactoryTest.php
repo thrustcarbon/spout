@@ -20,7 +20,7 @@ class WriterFactoryTest extends TestCase
     {
         $validCsv = $this->getResourcePath('csv_test_create_from_file.csv');
         $writer = WriterFactory::createFromFile($validCsv);
-        $this->assertInstanceOf('Box\Spout\Writer\CSV\Writer', $writer);
+        $this->assertInstanceOf(\Box\Spout\Writer\CSV\Writer::class, $writer);
     }
 
     /**
@@ -30,7 +30,7 @@ class WriterFactoryTest extends TestCase
     {
         $validCsv = $this->getResourcePath('csv_test_create_from_file.CSV');
         $writer = WriterFactory::createFromFile($validCsv);
-        $this->assertInstanceOf('Box\Spout\Writer\CSV\Writer', $writer);
+        $this->assertInstanceOf(\Box\Spout\Writer\CSV\Writer::class, $writer);
     }
 
     /**
@@ -40,7 +40,7 @@ class WriterFactoryTest extends TestCase
     {
         $validOds = $this->getResourcePath('csv_test_create_from_file.ods');
         $writer = WriterFactory::createFromFile($validOds);
-        $this->assertInstanceOf('Box\Spout\Writer\ODS\Writer', $writer);
+        $this->assertInstanceOf(\Box\Spout\Writer\ODS\Writer::class, $writer);
     }
 
     /**
@@ -50,7 +50,7 @@ class WriterFactoryTest extends TestCase
     {
         $validXlsx = $this->getResourcePath('csv_test_create_from_file.xlsx');
         $writer = WriterFactory::createFromFile($validXlsx);
-        $this->assertInstanceOf('Box\Spout\Writer\XLSX\Writer', $writer);
+        $this->assertInstanceOf(\Box\Spout\Writer\XLSX\Writer::class, $writer);
     }
 
     /**

@@ -51,13 +51,12 @@ class ReaderFactory
      */
     public static function createFromType($readerType)
     {
-        switch ($readerType) {
-            case Type::CSV: return self::createCSVReader();
-            case Type::XLSX: return self::createXLSXReader();
-            case Type::ODS: return self::createODSReader();
-            default:
-                throw new UnsupportedTypeException('No readers supporting the given type: ' . $readerType);
-        }
+        return match ($readerType) {
+            Type::CSV => self::createCSVReader(),
+            Type::XLSX => self::createXLSXReader(),
+            Type::ODS => self::createODSReader(),
+            default => throw new UnsupportedTypeException('No readers supporting the given type: ' . $readerType),
+        };
     }
 
     /**

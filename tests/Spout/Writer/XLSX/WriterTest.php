@@ -162,7 +162,7 @@ class WriterTest extends TestCase
         try {
             $writer->addRows($dataRows);
             $this->fail('Exception should have been thrown');
-        } catch (SpoutException $e) {
+        } catch (SpoutException) {
             $this->assertFileDoesNotExist($fileName, 'Output file should have been deleted');
 
             $numFiles = iterator_count(new \FilesystemIterator($tempFolderPath, \FilesystemIterator::SKIP_DOTS));
@@ -505,7 +505,7 @@ class WriterTest extends TestCase
         ]);
 
         // set the maxRowsPerSheet limit to 2
-        \ReflectionHelper::setStaticValue('\Box\Spout\Writer\XLSX\Manager\WorkbookManager', 'maxRowsPerWorksheet', 2);
+        \ReflectionHelper::setStaticValue(\Box\Spout\Writer\XLSX\Manager\WorkbookManager::class, 'maxRowsPerWorksheet', 2);
 
         $writer = $this->writeToXLSXFile($dataRows, $fileName, true, $shouldCreateSheetsAutomatically = true);
         $this->assertCount(2, $writer->getSheets(), '2 sheets should have been created.');
@@ -529,7 +529,7 @@ class WriterTest extends TestCase
         ]);
 
         // set the maxRowsPerSheet limit to 2
-        \ReflectionHelper::setStaticValue('\Box\Spout\Writer\XLSX\Manager\WorkbookManager', 'maxRowsPerWorksheet', 2);
+        \ReflectionHelper::setStaticValue(\Box\Spout\Writer\XLSX\Manager\WorkbookManager::class, 'maxRowsPerWorksheet', 2);
 
         $writer = $this->writeToXLSXFile($dataRows, $fileName, true, $shouldCreateSheetsAutomatically = false);
         $this->assertCount(1, $writer->getSheets(), 'Only 1 sheet should have been created.');

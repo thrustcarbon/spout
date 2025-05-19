@@ -52,6 +52,7 @@ class WorkbookManager extends WorkbookManagerAbstract
      *
      * @return void
      */
+    #[\Override]
     protected function closeRemainingObjects()
     {
         $this->worksheetManager->getSharedStringsManager()->close();

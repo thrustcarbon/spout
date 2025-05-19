@@ -11,13 +11,8 @@ use Box\Spout\Common\Entity\Style\Style;
  */
 class PossiblyUpdatedStyle
 {
-    private $style;
-    private $isUpdated;
-
-    public function __construct(Style $style, bool $isUpdated)
+    public function __construct(private readonly Style $style, private readonly bool $isUpdated)
     {
-        $this->style = $style;
-        $this->isUpdated = $isUpdated;
     }
 
     public function getStyle() : Style

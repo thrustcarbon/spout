@@ -18,20 +18,12 @@ use Box\Spout\Reader\Wrapper\XMLReader;
  */
 class InternalEntityFactory implements InternalEntityFactoryInterface
 {
-    /** @var HelperFactory */
-    private $helperFactory;
-
-    /** @var ManagerFactory */
-    private $managerFactory;
-
     /**
      * @param HelperFactory $helperFactory
      * @param ManagerFactory $managerFactory
      */
-    public function __construct(HelperFactory $helperFactory, ManagerFactory $managerFactory)
+    public function __construct(private readonly HelperFactory $helperFactory, private readonly ManagerFactory $managerFactory)
     {
-        $this->helperFactory = $helperFactory;
-        $this->managerFactory = $managerFactory;
     }
 
     /**

@@ -32,21 +32,6 @@ class CellValueFormatter
     /** Constants used for date formatting */
     public const NUM_SECONDS_IN_ONE_DAY = 86400;
 
-    /** @var SharedStringsManager Manages shared strings */
-    protected $sharedStringsManager;
-
-    /** @var StyleManager Manages styles */
-    protected $styleManager;
-
-    /** @var bool Whether date/time values should be returned as PHP objects or be formatted as strings */
-    protected $shouldFormatDates;
-
-    /** @var bool Whether date/time values should use a calendar starting in 1904 instead of 1900 */
-    protected $shouldUse1904Dates;
-
-    /** @var \Box\Spout\Common\Helper\Escaper\XLSX Used to unescape XML data */
-    protected $escaper;
-
     /**
      * @param SharedStringsManager $sharedStringsManager Manages shared strings
      * @param StyleManager $styleManager Manages styles
@@ -54,13 +39,8 @@ class CellValueFormatter
      * @param bool $shouldUse1904Dates Whether date/time values should use a calendar starting in 1904 instead of 1900
      * @param \Box\Spout\Common\Helper\Escaper\XLSX $escaper Used to unescape XML data
      */
-    public function __construct($sharedStringsManager, $styleManager, $shouldFormatDates, $shouldUse1904Dates, $escaper)
+    public function __construct(protected $sharedStringsManager, protected $styleManager, protected $shouldFormatDates, protected $shouldUse1904Dates, protected $escaper)
     {
-        $this->sharedStringsManager = $sharedStringsManager;
-        $this->styleManager = $styleManager;
-        $this->shouldFormatDates = $shouldFormatDates;
-        $this->shouldUse1904Dates = $shouldUse1904Dates;
-        $this->escaper = $escaper;
     }
 
     /**
@@ -81,22 +61,15 @@ class CellValueFormatter
             return $vNodeValue;
         }
 
-        switch ($cellType) {
-            case self::CELL_TYPE_INLINE_STRING:
-                return $this->formatInlineStringCellValue($node);
-            case self::CELL_TYPE_SHARED_STRING:
-                return $this->formatSharedStringCellValue($vNodeValue);
-            case self::CELL_TYPE_STR:
-                return $this->formatStrCellValue($vNodeValue);
-            case self::CELL_TYPE_BOOLEAN:
-                return $this->formatBooleanCellValue($vNodeValue);
-            case self::CELL_TYPE_NUMERIC:
-                return $this->formatNumericCellValue($vNodeValue, $cellStyleId);
-            case self::CELL_TYPE_DATE:
-                return $this->formatDateCellValue($vNodeValue);
-            default:
-                throw new InvalidValueException($vNodeValue);
-        }
+        return match ($cellType) {
+            self::CELL_TYPE_INLINE_STRING => $this->formatInlineStringCellValue($node),
+            self::CELL_TYPE_SHARED_STRING => $this->formatSharedStringCellValue($vNodeValue),
+            self::CELL_TYPE_STR => $this->formatStrCellValue($vNodeValue),
+            self::CELL_TYPE_BOOLEAN => $this->formatBooleanCellValue($vNodeValue),
+            self::CELL_TYPE_NUMERIC => $this->formatNumericCellValue($vNodeValue, $cellStyleId),
+            self::CELL_TYPE_DATE => $this->formatDateCellValue($vNodeValue),
+            default => throw new InvalidValueException($vNodeValue),
+        };
     }
 
     /**
@@ -287,7 +260,7 @@ class CellValueFormatter
         // Mitigate thrown Exception on invalid date-time format (http://php.net/manual/en/datetime.construct.php)
         try {
             $cellValue = ($this->shouldFormatDates) ? $nodeValue : new \DateTime($nodeValue);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             throw new InvalidValueException($nodeValue);
         }
 

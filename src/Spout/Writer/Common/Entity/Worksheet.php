@@ -8,14 +8,8 @@ namespace Box\Spout\Writer\Common\Entity;
  */
 class Worksheet
 {
-    /** @var string Path to the XML file that will contain the sheet data */
-    private $filePath;
-
     /** @var resource|null Pointer to the sheet data file (e.g. xl/worksheets/sheet1.xml) */
     private $filePointer;
-
-    /** @var Sheet The "external" sheet */
-    private $externalSheet;
 
     /** @var int Maximum number of columns among all the written rows */
     private $maxNumColumns;
@@ -26,14 +20,12 @@ class Worksheet
     /**
      * Worksheet constructor.
      *
-     * @param string $worksheetFilePath
+     * @param string $filePath
      * @param Sheet $externalSheet
      */
-    public function __construct($worksheetFilePath, Sheet $externalSheet)
+    public function __construct(private $filePath, private readonly Sheet $externalSheet)
     {
-        $this->filePath = $worksheetFilePath;
         $this->filePointer = null;
-        $this->externalSheet = $externalSheet;
         $this->maxNumColumns = 0;
         $this->lastWrittenRowIndex = 0;
     }

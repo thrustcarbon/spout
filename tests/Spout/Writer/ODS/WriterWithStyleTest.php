@@ -305,8 +305,8 @@ class WriterWithStyleTest extends TestCase
         $this->assertCount(3, $styleElements, 'There should be 3 styles)');
 
         // Use reflection for protected members here
-        $widthMap = \ReflectionHelper::getStaticValue('Box\Spout\Writer\ODS\Helper\BorderHelper', 'widthMap');
-        $styleMap = \ReflectionHelper::getStaticValue('Box\Spout\Writer\ODS\Helper\BorderHelper', 'styleMap');
+        $widthMap = \ReflectionHelper::getStaticValue(\Box\Spout\Writer\ODS\Helper\BorderHelper::class, 'widthMap');
+        $styleMap = \ReflectionHelper::getStaticValue(\Box\Spout\Writer\ODS\Helper\BorderHelper::class, 'styleMap');
 
         $expectedFirst = sprintf(
             '%s %s #%s',

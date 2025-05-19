@@ -41,24 +41,6 @@ EOD;
     /** @var bool Whether inline or shared strings should be used */
     protected $shouldUseInlineStrings;
 
-    /** @var RowManager Manages rows */
-    private $rowManager;
-
-    /** @var StyleManager Manages styles */
-    private $styleManager;
-
-    /** @var StyleMerger Helper to merge styles together */
-    private $styleMerger;
-
-    /** @var SharedStringsManager Helper to write shared strings */
-    private $sharedStringsManager;
-
-    /** @var XLSXEscaper Strings escaper */
-    private $stringsEscaper;
-
-    /** @var StringHelper String helper */
-    private $stringHelper;
-
     /**
      * WorksheetManager constructor.
      *
@@ -72,20 +54,14 @@ EOD;
      */
     public function __construct(
         OptionsManagerInterface $optionsManager,
-        RowManager $rowManager,
-        StyleManager $styleManager,
-        StyleMerger $styleMerger,
-        SharedStringsManager $sharedStringsManager,
-        XLSXEscaper $stringsEscaper,
-        StringHelper $stringHelper
+        private readonly RowManager $rowManager,
+        private readonly StyleManager $styleManager,
+        private readonly StyleMerger $styleMerger,
+        private readonly SharedStringsManager $sharedStringsManager,
+        private readonly XLSXEscaper $stringsEscaper,
+        private readonly StringHelper $stringHelper
     ) {
         $this->shouldUseInlineStrings = $optionsManager->getOption(Options::SHOULD_USE_INLINE_STRINGS);
-        $this->rowManager = $rowManager;
-        $this->styleManager = $styleManager;
-        $this->styleMerger = $styleMerger;
-        $this->sharedStringsManager = $sharedStringsManager;
-        $this->stringsEscaper = $stringsEscaper;
-        $this->stringHelper = $stringHelper;
     }
 
     /**

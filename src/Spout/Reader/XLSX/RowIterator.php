@@ -32,14 +32,8 @@ class RowIterator implements IteratorInterface
     public const XML_ATTRIBUTE_ROW_INDEX = 'r';
     public const XML_ATTRIBUTE_CELL_INDEX = 'r';
 
-    /** @var string Path of the XLSX file being read */
-    protected $filePath;
-
     /** @var string Path of the sheet data XML file as in [Content_Types].xml */
     protected $sheetDataXMLFilePath;
-
-    /** @var \Box\Spout\Reader\Wrapper\XMLReader The XMLReader object that will help read sheet's XML data */
-    protected $xmlReader;
 
     /** @var \Box\Spout\Reader\Common\XMLProcessor Helper Object to process XML nodes */
     protected $xmlProcessor;
@@ -71,9 +65,6 @@ class RowIterator implements IteratorInterface
     /** @var int The number of columns the sheet has (0 meaning undefined) */
     protected $numColumns = 0;
 
-    /** @var bool Whether empty rows should be returned or skipped */
-    protected $shouldPreserveEmptyRows;
-
     /** @var int Last row index processed (one-based) */
     protected $lastRowIndexProcessed = 0;
 
@@ -94,19 +85,16 @@ class RowIterator implements IteratorInterface
      * @param InternalEntityFactory $entityFactory Factory to create entities
      */
     public function __construct(
-        $filePath,
+        protected $filePath,
         $sheetDataXMLFilePath,
-        $shouldPreserveEmptyRows,
-        $xmlReader,
+        protected $shouldPreserveEmptyRows,
+        protected $xmlReader,
         XMLProcessor $xmlProcessor,
         CellValueFormatter $cellValueFormatter,
         RowManager $rowManager,
         InternalEntityFactory $entityFactory
     ) {
-        $this->filePath = $filePath;
         $this->sheetDataXMLFilePath = $this->normalizeSheetDataXMLFilePath($sheetDataXMLFilePath);
-        $this->shouldPreserveEmptyRows = $shouldPreserveEmptyRows;
-        $this->xmlReader = $xmlReader;
         $this->cellValueFormatter = $cellValueFormatter;
         $this->rowManager = $rowManager;
         $this->entityFactory = $entityFactory;
@@ -234,7 +222,7 @@ class RowIterator implements IteratorInterface
     {
         // Read dimensions of the sheet
         $dimensionRef = $xmlReader->getAttribute(self::XML_ATTRIBUTE_REF); // returns 'A1:M13' for instance (or 'A1' for empty sheet)
-        if (\preg_match('/[A-Z]+\d+:([A-Z]+\d+)/', $dimensionRef, $matches)) {
+        if (\preg_match('/[A-Z]+\d+:([A-Z]+\d+)/', (string) $dimensionRef, $matches)) {
             $this->numColumns = CellHelper::getColumnIndexFromCellIndex($matches[1]) + 1;
         }
 
@@ -257,7 +245,7 @@ class RowIterator implements IteratorInterface
         $numberOfColumnsForRow = $this->numColumns;
         $spans = $xmlReader->getAttribute(self::XML_ATTRIBUTE_SPANS); // returns '1:5' for instance
         if ($spans) {
-            list(, $numberOfColumnsForRow) = \explode(':', $spans);
+            [, $numberOfColumnsForRow] = \explode(':', $spans);
             $numberOfColumnsForRow = (int) $numberOfColumnsForRow;
         }
 
@@ -375,7 +363,7 @@ class RowIterator implements IteratorInterface
      *
      * @return Row|null
      */
-    public function current() : ?Row
+    public function current(): mixed
     {
         $rowToBeProcessed = $this->rowBuffer;
 

@@ -28,12 +28,6 @@ class WorkbookRelationshipsManager
     public const XML_ATTRIBUTE_TYPE = 'Type';
     public const XML_ATTRIBUTE_TARGET = 'Target';
 
-    /** @var string Path of the XLSX file being read */
-    private $filePath;
-
-    /** @var InternalEntityFactory Factory to create entities */
-    private $entityFactory;
-
     /** @var array|null Cache of the already read workbook relationships: [TYPE] => [FILE_NAME] */
     private $cachedWorkbookRelationships;
 
@@ -41,10 +35,8 @@ class WorkbookRelationshipsManager
      * @param string $filePath Path of the XLSX file being read
      * @param InternalEntityFactory $entityFactory Factory to create entities
      */
-    public function __construct($filePath, $entityFactory)
+    public function __construct(private $filePath, private $entityFactory)
     {
-        $this->filePath = $filePath;
-        $this->entityFactory = $entityFactory;
     }
 
     /**
@@ -57,7 +49,7 @@ class WorkbookRelationshipsManager
             ?? $workbookRelationships[self::RELATIONSHIP_TYPE_SHARED_STRINGS_STRICT];
 
         // the file path can be relative (e.g. "styles.xml") or absolute (e.g. "/xl/styles.xml")
-        $doesContainBasePath = (\strpos($sharedStringsXMLFilePath, self::BASE_PATH) !== false);
+        $doesContainBasePath = (str_contains((string) $sharedStringsXMLFilePath, self::BASE_PATH));
         if (!$doesContainBasePath) {
             // make sure we return an absolute file path
             $sharedStringsXMLFilePath = self::BASE_PATH . $sharedStringsXMLFilePath;
@@ -98,7 +90,7 @@ class WorkbookRelationshipsManager
             ?? $workbookRelationships[self::RELATIONSHIP_TYPE_STYLES_STRICT];
 
         // the file path can be relative (e.g. "styles.xml") or absolute (e.g. "/xl/styles.xml")
-        $doesContainBasePath = (\strpos($stylesXMLFilePath, self::BASE_PATH) !== false);
+        $doesContainBasePath = (str_contains((string) $stylesXMLFilePath, self::BASE_PATH));
         if (!$doesContainBasePath) {
             // make sure we return a full path
             $stylesXMLFilePath = self::BASE_PATH . $stylesXMLFilePath;

@@ -17,7 +17,7 @@ class ReaderEntityFactoryTest extends TestCase
     {
         $validCsv = $this->getResourcePath('csv_test_create_from_file.csv');
         $reader = ReaderEntityFactory::createReaderFromFile($validCsv);
-        $this->assertInstanceOf('Box\Spout\Reader\CSV\Reader', $reader);
+        $this->assertInstanceOf(\Box\Spout\Reader\CSV\Reader::class, $reader);
     }
 
     /**
@@ -27,7 +27,7 @@ class ReaderEntityFactoryTest extends TestCase
     {
         $validCsv = $this->getResourcePath('csv_test_create_from_file.CSV');
         $reader = ReaderEntityFactory::createReaderFromFile($validCsv);
-        $this->assertInstanceOf('Box\Spout\Reader\CSV\Reader', $reader);
+        $this->assertInstanceOf(\Box\Spout\Reader\CSV\Reader::class, $reader);
     }
 
     /**
@@ -37,7 +37,7 @@ class ReaderEntityFactoryTest extends TestCase
     {
         $validOds = $this->getResourcePath('csv_test_create_from_file.ods');
         $reader = ReaderEntityFactory::createReaderFromFile($validOds);
-        $this->assertInstanceOf('Box\Spout\Reader\ODS\Reader', $reader);
+        $this->assertInstanceOf(\Box\Spout\Reader\ODS\Reader::class, $reader);
     }
 
     /**
@@ -47,7 +47,7 @@ class ReaderEntityFactoryTest extends TestCase
     {
         $validXlsx = $this->getResourcePath('csv_test_create_from_file.xlsx');
         $reader = ReaderEntityFactory::createReaderFromFile($validXlsx);
-        $this->assertInstanceOf('Box\Spout\Reader\XLSX\Reader', $reader);
+        $this->assertInstanceOf(\Box\Spout\Reader\XLSX\Reader::class, $reader);
     }
 
     /**
@@ -67,6 +67,6 @@ class ReaderEntityFactoryTest extends TestCase
     {
         $notExistingFile = 'thereisnosuchfile.csv';
         $reader = ReaderEntityFactory::createReaderFromFile($notExistingFile);
-        $this->assertInstanceOf('Box\Spout\Reader\CSV\Reader', $reader);
+        $this->assertInstanceOf(\Box\Spout\Reader\CSV\Reader::class, $reader);
     }
 }

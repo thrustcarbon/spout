@@ -26,12 +26,6 @@ class FileBasedStrategy implements CachingStrategyInterface
     /** @var string Temporary folder where the temporary files will be created */
     protected $tempFolder;
 
-    /**
-     * @var int Maximum number of strings that can be stored in one temp file
-     * @see CachingStrategyFactory::MAX_NUM_STRINGS_PER_TEMP_FILE
-     */
-    protected $maxNumStringsPerTempFile;
-
     /** @var resource|null Pointer to the last temp file a shared string was written to */
     protected $tempFilePointer;
 
@@ -52,12 +46,13 @@ class FileBasedStrategy implements CachingStrategyInterface
      * @param int $maxNumStringsPerTempFile Maximum number of strings that can be stored in one temp file
      * @param HelperFactory $helperFactory Factory to create helpers
      */
-    public function __construct($tempFolder, $maxNumStringsPerTempFile, $helperFactory)
+    public function __construct($tempFolder, /**
+     * @see CachingStrategyFactory::MAX_NUM_STRINGS_PER_TEMP_FILE
+     */
+    protected $maxNumStringsPerTempFile, $helperFactory)
     {
         $this->fileSystemHelper = $helperFactory->createFileSystemHelper($tempFolder);
         $this->tempFolder = $this->fileSystemHelper->createFolder($tempFolder, \uniqid('sharedstrings'));
-
-        $this->maxNumStringsPerTempFile = $maxNumStringsPerTempFile;
 
         $this->globalFunctionsHelper = $helperFactory->createGlobalFunctionsHelper();
         $this->tempFilePointer = null;

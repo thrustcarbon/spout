@@ -27,9 +27,6 @@ class FileSystemHelper extends \Box\Spout\Common\Helper\FileSystemHelper impleme
     public const MIMETYPE_FILE_NAME = 'mimetype';
     public const STYLES_XML_FILE_NAME = 'styles.xml';
 
-    /** @var ZipHelper Helper to perform tasks with Zip archive */
-    private $zipHelper;
-
     /** @var string Path to the root folder inside the temp folder where the files to create the ODS will be stored */
     protected $rootFolder;
 
@@ -43,10 +40,9 @@ class FileSystemHelper extends \Box\Spout\Common\Helper\FileSystemHelper impleme
      * @param string $baseFolderPath The path of the base folder where all the I/O can occur
      * @param ZipHelper $zipHelper Helper to perform tasks with Zip archive
      */
-    public function __construct($baseFolderPath, $zipHelper)
+    public function __construct($baseFolderPath, private $zipHelper)
     {
         parent::__construct($baseFolderPath);
-        $this->zipHelper = $zipHelper;
     }
 
     /**

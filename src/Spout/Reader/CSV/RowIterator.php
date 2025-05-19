@@ -21,9 +21,6 @@ class RowIterator implements IteratorInterface
      */
     public const MAX_READ_BYTES_PER_LINE = 0;
 
-    /** @var resource|null Pointer to the CSV file to read */
-    protected $filePointer;
-
     /** @var int Number of read rows */
     protected $numReadRows = 0;
 
@@ -62,13 +59,12 @@ class RowIterator implements IteratorInterface
      * @param GlobalFunctionsHelper $globalFunctionsHelper
      */
     public function __construct(
-        $filePointer,
+        protected $filePointer,
         OptionsManagerInterface $optionsManager,
         EncodingHelper $encodingHelper,
         InternalEntityFactory $entityFactory,
         GlobalFunctionsHelper $globalFunctionsHelper
     ) {
-        $this->filePointer = $filePointer;
         $this->fieldDelimiter = $optionsManager->getOption(Options::FIELD_DELIMITER);
         $this->fieldEnclosure = $optionsManager->getOption(Options::FIELD_ENCLOSURE);
         $this->encoding = $optionsManager->getOption(Options::ENCODING);
@@ -147,7 +143,7 @@ class RowIterator implements IteratorInterface
 
         if ($rowData !== false) {
             // array_map will replace NULL values by empty strings
-            $rowDataBufferAsArray = array_map(function ($value) { return (string) $value; }, $rowData);
+            $rowDataBufferAsArray = array_map(fn($value) => (string) $value, $rowData);
             $this->rowBuffer = $this->entityFactory->createRowFromArray($rowDataBufferAsArray);
             $this->numReadRows++;
         } else {
@@ -193,13 +189,13 @@ class RowIterator implements IteratorInterface
                 case EncodingHelper::ENCODING_UTF16_LE:
                 case EncodingHelper::ENCODING_UTF32_LE:
                     // remove whitespace from the beginning of a string as fgetcsv() add extra whitespace when it try to explode non UTF-8 data
-                    $cellValue = \ltrim($cellValue);
+                    $cellValue = \ltrim((string) $cellValue);
                     break;
 
                 case EncodingHelper::ENCODING_UTF16_BE:
                 case EncodingHelper::ENCODING_UTF32_BE:
                     // remove whitespace from the end of a string as fgetcsv() add extra whitespace when it try to explode non UTF-8 data
-                    $cellValue = \rtrim($cellValue);
+                    $cellValue = \rtrim((string) $cellValue);
                     break;
             }
 

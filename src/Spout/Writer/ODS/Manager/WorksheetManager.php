@@ -21,18 +21,6 @@ use Box\Spout\Writer\ODS\Manager\Style\StyleManager;
  */
 class WorksheetManager implements WorksheetManagerInterface
 {
-    /** @var \Box\Spout\Common\Helper\Escaper\ODS Strings escaper */
-    private $stringsEscaper;
-
-    /** @var StringHelper String helper */
-    private $stringHelper;
-
-    /** @var StyleManager Manages styles */
-    private $styleManager;
-
-    /** @var StyleMerger Helper to merge styles together */
-    private $styleMerger;
-
     /**
      * WorksheetManager constructor.
      *
@@ -41,16 +29,8 @@ class WorksheetManager implements WorksheetManagerInterface
      * @param ODSEscaper $stringsEscaper
      * @param StringHelper $stringHelper
      */
-    public function __construct(
-        StyleManager $styleManager,
-        StyleMerger $styleMerger,
-        ODSEscaper $stringsEscaper,
-        StringHelper $stringHelper
-    ) {
-        $this->styleManager = $styleManager;
-        $this->styleMerger = $styleMerger;
-        $this->stringsEscaper = $stringsEscaper;
-        $this->stringHelper = $stringHelper;
+    public function __construct(private readonly StyleManager $styleManager, private readonly StyleMerger $styleMerger, private readonly ODSEscaper $stringsEscaper, private readonly StringHelper $stringHelper)
+    {
     }
 
     /**
@@ -123,7 +103,7 @@ class WorksheetManager implements WorksheetManagerInterface
             /** @var Cell $cell */
             $cell = $cells[$currentCellIndex];
             /** @var Cell|null $nextCell */
-            $nextCell = isset($cells[$nextCellIndex]) ? $cells[$nextCellIndex] : null;
+            $nextCell = $cells[$nextCellIndex] ?? null;
 
             if ($nextCell === null || $cell->getValue() !== $nextCell->getValue()) {
                 $registeredStyle = $this->applyStyleAndRegister($cell, $rowStyle);
@@ -219,7 +199,7 @@ class WorksheetManager implements WorksheetManagerInterface
         if ($cell->isString()) {
             $data .= ' office:value-type="string" calcext:value-type="string">';
 
-            $cellValueLines = \explode("\n", $cell->getValue());
+            $cellValueLines = \explode("\n", (string) $cell->getValue());
             foreach ($cellValueLines as $cellValueLine) {
                 $data .= '<text:p>' . $this->stringsEscaper->escape($cellValueLine) . '</text:p>';
             }

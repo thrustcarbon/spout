@@ -6,6 +6,7 @@ use Box\Spout\Common\Creator\HelperFactory;
 use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Helper\EncodingHelper;
 use Box\Spout\Common\Helper\GlobalFunctionsHelper;
+use Box\Spout\Common\Manager\OptionsManagerInterface;
 use Box\Spout\Reader\CSV\Creator\InternalEntityFactory;
 use Box\Spout\Reader\CSV\Manager\OptionsManager;
 use Box\Spout\Reader\Exception\ReaderNotOpenedException;
@@ -48,7 +49,7 @@ class ReaderTest extends TestCase
         $this->expectException(IOException::class);
 
         /** @var \Box\Spout\Common\Helper\GlobalFunctionsHelper|\PHPUnit\Framework\MockObject\MockObject $helperStub */
-        $helperStub = $this->getMockBuilder('\Box\Spout\Common\Helper\GlobalFunctionsHelper')
+        $helperStub = $this->getMockBuilder(\Box\Spout\Common\Helper\GlobalFunctionsHelper::class)
                         ->onlyMethods(['is_readable'])
                         ->getMock();
         $helperStub->method('is_readable')->willReturn(false);
@@ -67,7 +68,7 @@ class ReaderTest extends TestCase
         $this->expectException(IOException::class);
 
         /** @var \Box\Spout\Common\Helper\GlobalFunctionsHelper|\PHPUnit\Framework\MockObject\MockObject $helperStub */
-        $helperStub = $this->getMockBuilder('\Box\Spout\Common\Helper\GlobalFunctionsHelper')
+        $helperStub = $this->getMockBuilder(\Box\Spout\Common\Helper\GlobalFunctionsHelper::class)
                         ->onlyMethods(['fopen'])
                         ->getMock();
         $helperStub->method('fopen')->willReturn(false);
@@ -305,7 +306,7 @@ class ReaderTest extends TestCase
         $resourcePath = $this->getResourcePath($fileName);
 
         /** @var \Box\Spout\Common\Helper\GlobalFunctionsHelper|\PHPUnit\Framework\MockObject\MockObject $helperStub */
-        $helperStub = $this->getMockBuilder('\Box\Spout\Common\Helper\GlobalFunctionsHelper')
+        $helperStub = $this->getMockBuilder(\Box\Spout\Common\Helper\GlobalFunctionsHelper::class)
                         ->onlyMethods(['function_exists'])
                         ->getMock();
 
@@ -478,11 +479,9 @@ class ReaderTest extends TestCase
     }
 
     /**
-     * @param \Box\Spout\Common\Helper\GlobalFunctionsHelper|null $optionsManager
-     * @param \Box\Spout\Common\Manager\OptionsManagerInterface|null $globalFunctionsHelper
      * @return ReaderInterface
      */
-    private function createCSVReader($optionsManager = null, $globalFunctionsHelper = null)
+    private function createCSVReader(?OptionsManagerInterface $optionsManager = null, ?GlobalFunctionsHelper $globalFunctionsHelper = null)
     {
         $optionsManager = $optionsManager ?: new OptionsManager();
         $globalFunctionsHelper = $globalFunctionsHelper ?: new GlobalFunctionsHelper();

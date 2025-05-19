@@ -45,17 +45,11 @@ class StyleManager
         47 => 'mm:ss.0',  // @NOTE: ECMA spec is 'mmss.0',
     ];
 
-    /** @var string Path of the XLSX file being read */
-    protected $filePath;
-
     /** @var bool Whether the XLSX file contains a styles XML file */
     protected $hasStylesXMLFile;
 
     /** @var string|null Path of the styles XML file */
     protected $stylesXMLFilePath;
-
-    /** @var InternalEntityFactory Factory to create entities */
-    protected $entityFactory;
 
     /** @var array Array containing the IDs of built-in number formats indicating a date */
     protected $builtinNumFmtIdIndicatingDates;
@@ -74,10 +68,8 @@ class StyleManager
      * @param WorkbookRelationshipsManager $workbookRelationshipsManager Helps retrieving workbook relationships
      * @param InternalEntityFactory $entityFactory Factory to create entities
      */
-    public function __construct($filePath, $workbookRelationshipsManager, $entityFactory)
+    public function __construct(protected $filePath, $workbookRelationshipsManager, protected $entityFactory)
     {
-        $this->filePath = $filePath;
-        $this->entityFactory = $entityFactory;
         $this->builtinNumFmtIdIndicatingDates = \array_keys(self::$builtinNumFmtIdToNumFormatMapping);
         $this->hasStylesXMLFile = $workbookRelationshipsManager->hasStylesXMLFile();
         if ($this->hasStylesXMLFile) {
@@ -264,7 +256,7 @@ class StyleManager
         $customNumberFormats = $this->getCustomNumberFormats();
 
         // Using isset here because it is way faster than array_key_exists...
-        return (isset($customNumberFormats[$numFmtId])) ? $customNumberFormats[$numFmtId] : null;
+        return $customNumberFormats[$numFmtId] ?? null;
     }
 
     /**
@@ -310,7 +302,7 @@ class StyleManager
             // character not preceded by "\" (case insensitive)
             $pattern = '/(?<!\\\)' . $dateFormatCharacter . '/i';
 
-            if (\preg_match($pattern, $formatCode)) {
+            if (\preg_match($pattern, (string) $formatCode)) {
                 $hasFoundDateFormatCharacter = true;
                 break;
             }

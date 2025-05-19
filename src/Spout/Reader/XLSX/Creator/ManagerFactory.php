@@ -15,12 +15,6 @@ use Box\Spout\Reader\XLSX\Manager\WorkbookRelationshipsManager;
  */
 class ManagerFactory
 {
-    /** @var HelperFactory */
-    private $helperFactory;
-
-    /** @var CachingStrategyFactory */
-    private $cachingStrategyFactory;
-
     /** @var WorkbookRelationshipsManager|null */
     private $cachedWorkbookRelationshipsManager;
 
@@ -28,10 +22,8 @@ class ManagerFactory
      * @param HelperFactory $helperFactory Factory to create helpers
      * @param CachingStrategyFactory $cachingStrategyFactory Factory to create shared strings caching strategies
      */
-    public function __construct(HelperFactory $helperFactory, CachingStrategyFactory $cachingStrategyFactory)
+    public function __construct(private readonly HelperFactory $helperFactory, private readonly CachingStrategyFactory $cachingStrategyFactory)
     {
-        $this->helperFactory = $helperFactory;
-        $this->cachingStrategyFactory = $cachingStrategyFactory;
     }
 
     /**

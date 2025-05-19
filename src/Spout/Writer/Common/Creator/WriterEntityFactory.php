@@ -48,7 +48,7 @@ class WriterEntityFactory
     {
         try {
             return WriterFactory::createFromType(Type::CSV);
-        } catch (UnsupportedTypeException $e) {
+        } catch (UnsupportedTypeException) {
             // should never happen
             return null;
         }
@@ -63,7 +63,7 @@ class WriterEntityFactory
     {
         try {
             return WriterFactory::createFromType(Type::XLSX);
-        } catch (UnsupportedTypeException $e) {
+        } catch (UnsupportedTypeException) {
             // should never happen
             return null;
         }
@@ -78,7 +78,7 @@ class WriterEntityFactory
     {
         try {
             return WriterFactory::createFromType(Type::ODS);
-        } catch (UnsupportedTypeException $e) {
+        } catch (UnsupportedTypeException) {
             // should never happen
             return null;
         }
@@ -89,7 +89,7 @@ class WriterEntityFactory
      * @param Style|null $rowStyle
      * @return Row
      */
-    public static function createRow(array $cells = [], Style $rowStyle = null)
+    public static function createRow(array $cells = [], ?Style $rowStyle = null)
     {
         return new Row($cells, $rowStyle);
     }
@@ -99,11 +99,9 @@ class WriterEntityFactory
      * @param Style|null $rowStyle
      * @return Row
      */
-    public static function createRowFromArray(array $cellValues = [], Style $rowStyle = null)
+    public static function createRowFromArray(array $cellValues = [], ?Style $rowStyle = null)
     {
-        $cells = \array_map(function ($cellValue) {
-            return new Cell($cellValue);
-        }, $cellValues);
+        $cells = \array_map(fn($cellValue) => new Cell($cellValue), $cellValues);
 
         return new Row($cells, $rowStyle);
     }
@@ -113,7 +111,7 @@ class WriterEntityFactory
      * @param Style|null $cellStyle
      * @return Cell
      */
-    public static function createCell($cellValue, Style $cellStyle = null)
+    public static function createCell($cellValue, ?Style $cellStyle = null)
     {
         return new Cell($cellValue, $cellStyle);
     }
