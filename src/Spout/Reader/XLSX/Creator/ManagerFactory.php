@@ -63,7 +63,7 @@ class ManagerFactory
     /**
      * @param string $filePath Path of the XLSX file being read
      * @param \Box\Spout\Common\Manager\OptionsManagerInterface $optionsManager Reader's options manager
-     * @param \Box\Spout\Reader\XLSX\Manager\SharedStringsManager $sharedStringsManager Manages shared strings
+     * @param SharedStringsManager $sharedStringsManager Manages shared strings
      * @param InternalEntityFactory $entityFactory Factory to create entities
      * @return SheetManager
      */

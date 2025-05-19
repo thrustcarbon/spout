@@ -59,7 +59,7 @@ EOD;
         private readonly StyleMerger $styleMerger,
         private readonly SharedStringsManager $sharedStringsManager,
         private readonly XLSXEscaper $stringsEscaper,
-        private readonly StringHelper $stringHelper
+        private readonly StringHelper $stringHelper,
     ) {
         $this->shouldUseInlineStrings = $optionsManager->getOption(Options::SHOULD_USE_INLINE_STRINGS);
     }

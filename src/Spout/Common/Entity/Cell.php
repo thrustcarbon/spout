@@ -209,7 +209,7 @@ class Cell implements \Stringable
     /**
      * @return string
      */
-    public function __toString(): string
+    public function __toString() : string
     {
         return (string) $this->getValue();
     }

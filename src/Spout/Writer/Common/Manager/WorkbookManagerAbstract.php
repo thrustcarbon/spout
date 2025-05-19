@@ -68,7 +68,7 @@ abstract class WorkbookManagerAbstract implements WorkbookManagerInterface
         StyleMerger $styleMerger,
         FileSystemWithRootFolderHelperInterface $fileSystemHelper,
         InternalEntityFactory $entityFactory,
-        ManagerFactoryInterface $managerFactory
+        ManagerFactoryInterface $managerFactory,
     ) {
         $this->workbook = $workbook;
         $this->optionsManager = $optionsManager;
@@ -117,7 +117,7 @@ abstract class WorkbookManagerAbstract implements WorkbookManagerInterface
     /**
      * Creates a new sheet in the workbook. The current sheet remains unchanged.
      *
-     * @throws \Box\Spout\Common\Exception\IOException If unable to open the sheet for writing
+     * @throws IOException If unable to open the sheet for writing
      * @return Worksheet The created sheet
      */
     private function addNewSheet()

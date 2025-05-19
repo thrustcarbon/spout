@@ -136,7 +136,7 @@ class XLSX implements EscaperInterface
             return $escapedString;
         }
 
-        return \preg_replace_callback("/({$this->escapableControlCharactersPattern})/", fn($matches) => $this->controlCharactersEscapingReverseMap[$matches[0]], $escapedString);
+        return \preg_replace_callback("/({$this->escapableControlCharactersPattern})/", fn ($matches) => $this->controlCharactersEscapingReverseMap[$matches[0]], $escapedString);
     }
 
     /**

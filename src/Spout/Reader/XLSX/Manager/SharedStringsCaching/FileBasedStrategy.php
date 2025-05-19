@@ -49,7 +49,7 @@ class FileBasedStrategy implements CachingStrategyInterface
     public function __construct($tempFolder, /**
      * @see CachingStrategyFactory::MAX_NUM_STRINGS_PER_TEMP_FILE
      */
-    protected $maxNumStringsPerTempFile, $helperFactory)
+        protected $maxNumStringsPerTempFile, $helperFactory)
     {
         $this->fileSystemHelper = $helperFactory->createFileSystemHelper($tempFolder);
         $this->tempFolder = $this->fileSystemHelper->createFolder($tempFolder, \uniqid('sharedstrings'));
@@ -114,7 +114,7 @@ class FileBasedStrategy implements CachingStrategyInterface
      * Returns the string located at the given index from the cache.
      *
      * @param int $sharedStringIndex Index of the shared string in the sharedStrings.xml file
-     * @throws \Box\Spout\Reader\Exception\SharedStringNotFoundException If no shared string found for the given index
+     * @throws SharedStringNotFoundException If no shared string found for the given index
      * @return string The shared string at the given index
      */
     public function getStringAtIndex($sharedStringIndex)

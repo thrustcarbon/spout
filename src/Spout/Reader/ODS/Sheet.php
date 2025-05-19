@@ -25,7 +25,7 @@ class Sheet implements SheetInterface
     }
 
     /**
-     * @return \Box\Spout\Reader\ODS\RowIterator
+     * @return RowIterator
      */
     public function getRowIterator()
     {

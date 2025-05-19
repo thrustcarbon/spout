@@ -16,7 +16,7 @@ class ReaderEntityFactory
      * Creates a reader by file extension
      *
      * @param string $path The path to the spreadsheet file. Supported extensions are .csv, .ods and .xlsx
-     * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
+     * @throws UnsupportedTypeException
      * @return ReaderInterface
      */
     public static function createReaderFromFile(string $path)

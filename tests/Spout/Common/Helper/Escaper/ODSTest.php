@@ -2,7 +2,6 @@
 
 namespace Box\Spout\Common\Helper\Escaper;
 
-use Box\Spout\Common\Helper\Escaper;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -35,7 +34,7 @@ class ODSTest extends TestCase
      */
     public function testEscape($stringToEscape, $expectedEscapedString)
     {
-        $escaper = new Escaper\ODS();
+        $escaper = new ODS();
         $escapedString = $escaper->escape($stringToEscape);
 
         $this->assertEquals($expectedEscapedString, $escapedString, 'Incorrect escaped string');

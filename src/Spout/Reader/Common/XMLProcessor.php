@@ -26,7 +26,7 @@ class XMLProcessor
     private $callbacks = [];
 
     /**
-     * @param \Box\Spout\Reader\Wrapper\XMLReader $xmlReader XMLReader object
+     * @param XMLReader $xmlReader XMLReader object
      */
     public function __construct(protected $xmlReader)
     {

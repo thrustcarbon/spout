@@ -22,7 +22,7 @@ class StyleManagerTest extends TestCase
         $workbookRelationshipsManager->method('hasStylesXMLFile')->willReturn(true);
 
         /** @var StyleManager|\PHPUnit\Framework\MockObject\MockObject $styleManager */
-        $styleManager = $this->getMockBuilder(\Box\Spout\Reader\XLSX\Manager\StyleManager::class)
+        $styleManager = $this->getMockBuilder(StyleManager::class)
                              ->setConstructorArgs(['/path/to/file.xlsx', $workbookRelationshipsManager, $entityFactory])
                              ->onlyMethods(['getCustomNumberFormats', 'getStylesAttributes'])
                              ->getMock();

@@ -60,7 +60,7 @@ class SheetIterator implements IteratorInterface
      * Rewind the Iterator to the first element
      * @see http://php.net/manual/en/iterator.rewind.php
      *
-     * @throws \Box\Spout\Common\Exception\IOException If unable to open the XML file containing sheets' data
+     * @throws IOException If unable to open the XML file containing sheets' data
      * @return void
      */
     public function rewind()
@@ -141,7 +141,7 @@ class SheetIterator implements IteratorInterface
      * Return the current element
      * @see http://php.net/manual/en/iterator.current.php
      *
-     * @return \Box\Spout\Reader\ODS\Sheet
+     * @return Sheet
      */
     public function current()
     {
@@ -176,8 +176,8 @@ class SheetIterator implements IteratorInterface
         // The given sheet is active if its name matches the defined active sheet's name
         // or if no information about the active sheet was found, it defaults to the first sheet.
         return (
-            ($activeSheetName === null && $sheetIndex === 0) ||
-            ($activeSheetName === $sheetName)
+            ($activeSheetName === null && $sheetIndex === 0)
+            || ($activeSheetName === $sheetName)
         );
     }
 

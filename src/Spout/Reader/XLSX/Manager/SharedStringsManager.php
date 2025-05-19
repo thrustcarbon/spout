@@ -63,7 +63,7 @@ class SharedStringsManager
      * The XML file can be really big with sheets containing a lot of data. That is why
      * we need to use a XML reader that provides streaming like the XMLReader library.
      *
-     * @throws \Box\Spout\Common\Exception\IOException If shared strings XML file can't be read
+     * @throws IOException If shared strings XML file can't be read
      * @return void
      */
     public function extractSharedStrings()
@@ -101,8 +101,8 @@ class SharedStringsManager
     /**
      * Returns the shared strings unique count, as specified in <sst> tag.
      *
-     * @param \Box\Spout\Reader\Wrapper\XMLReader $xmlReader XMLReader instance
-     * @throws \Box\Spout\Common\Exception\IOException If sharedStrings.xml is invalid and can't be read
+     * @param XMLReader $xmlReader XMLReader instance
+     * @throws IOException If sharedStrings.xml is invalid and can't be read
      * @return int|null Number of unique shared strings in the sharedStrings.xml file
      */
     protected function getSharedStringsUniqueCount($xmlReader)
@@ -140,7 +140,7 @@ class SharedStringsManager
     /**
      * Processes the shared strings item XML node which the given XML reader is positioned on.
      *
-     * @param \Box\Spout\Reader\Wrapper\XMLReader $xmlReader XML Reader positioned on a "<si>" node
+     * @param XMLReader $xmlReader XML Reader positioned on a "<si>" node
      * @param int $sharedStringIndex Index of the processed shared strings item
      * @return void
      */

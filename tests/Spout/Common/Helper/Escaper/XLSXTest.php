@@ -2,7 +2,6 @@
 
 namespace Box\Spout\Common\Helper\Escaper;
 
-use Box\Spout\Common\Helper\Escaper;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -39,7 +38,7 @@ class XLSXTest extends TestCase
      */
     public function testEscape($stringToEscape, $expectedEscapedString)
     {
-        $escaper = new Escaper\XLSX();
+        $escaper = new XLSX();
         $escapedString = $escaper->escape($stringToEscape);
 
         $this->assertEquals($expectedEscapedString, $escapedString, 'Incorrect escaped string');
@@ -74,7 +73,7 @@ class XLSXTest extends TestCase
      */
     public function testUnescape($stringToUnescape, $expectedUnescapedString)
     {
-        $escaper = new Escaper\XLSX();
+        $escaper = new XLSX();
         $unescapedString = $escaper->unescape($stringToUnescape);
 
         $this->assertEquals($expectedUnescapedString, $unescapedString, 'Incorrect escaped string');

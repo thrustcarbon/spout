@@ -32,16 +32,16 @@ class RowIterator implements IteratorInterface
     public const XML_ATTRIBUTE_NUM_ROWS_REPEATED = 'table:number-rows-repeated';
     public const XML_ATTRIBUTE_NUM_COLUMNS_REPEATED = 'table:number-columns-repeated';
 
-    /** @var \Box\Spout\Reader\Wrapper\XMLReader The XMLReader object that will help read sheet's XML data */
+    /** @var XMLReader The XMLReader object that will help read sheet's XML data */
     protected $xmlReader;
 
-    /** @var \Box\Spout\Reader\Common\XMLProcessor Helper Object to process XML nodes */
+    /** @var XMLProcessor Helper Object to process XML nodes */
     protected $xmlProcessor;
 
     /** @var bool Whether empty rows should be returned or skipped */
     protected $shouldPreserveEmptyRows;
 
-    /** @var Helper\CellValueFormatter Helper to format cell values */
+    /** @var CellValueFormatter Helper to format cell values */
     protected $cellValueFormatter;
 
     /** @var RowManager Manages rows */
@@ -94,7 +94,7 @@ class RowIterator implements IteratorInterface
         CellValueFormatter $cellValueFormatter,
         XMLProcessor $xmlProcessor,
         RowManager $rowManager,
-        InternalEntityFactory $entityFactory
+        InternalEntityFactory $entityFactory,
     ) {
         $this->xmlReader = $xmlReader;
         $this->shouldPreserveEmptyRows = $optionsManager->getOption(Options::SHOULD_PRESERVE_EMPTY_ROWS);
@@ -115,7 +115,7 @@ class RowIterator implements IteratorInterface
      * NOTE: It can only be done once, as it is not possible to read an XML file backwards.
      * @see http://php.net/manual/en/iterator.rewind.php
      *
-     * @throws \Box\Spout\Reader\Exception\IteratorNotRewindableException If the iterator is rewound more than once
+     * @throws IteratorNotRewindableException If the iterator is rewound more than once
      * @return void
      */
     public function rewind() : void
@@ -152,7 +152,7 @@ class RowIterator implements IteratorInterface
      * @see http://php.net/manual/en/iterator.next.php
      *
      * @throws \Box\Spout\Reader\Exception\SharedStringNotFoundException If a shared string was not found
-     * @throws \Box\Spout\Common\Exception\IOException If unable to read the sheet data XML
+     * @throws IOException If unable to read the sheet data XML
      * @return void
      */
     public function next() : void
@@ -178,14 +178,14 @@ class RowIterator implements IteratorInterface
         $hasReadAtLeastOneRow = ($this->lastRowIndexProcessed !== 0);
 
         return (
-            !$hasReadAtLeastOneRow ||
-            $this->lastRowIndexProcessed === $this->nextRowIndexToBeProcessed - 1
+            !$hasReadAtLeastOneRow
+            || $this->lastRowIndexProcessed === $this->nextRowIndexToBeProcessed - 1
         );
     }
 
     /**
      * @throws \Box\Spout\Reader\Exception\SharedStringNotFoundException If a shared string was not found
-     * @throws \Box\Spout\Common\Exception\IOException If unable to read the sheet data XML
+     * @throws IOException If unable to read the sheet data XML
      * @return void
      */
     protected function readDataForNextRow()
@@ -202,7 +202,7 @@ class RowIterator implements IteratorInterface
     }
 
     /**
-     * @param \Box\Spout\Reader\Wrapper\XMLReader $xmlReader XMLReader object, positioned on a "<table:table-row>" starting node
+     * @param XMLReader $xmlReader XMLReader object, positioned on a "<table:table-row>" starting node
      * @return int A return code that indicates what action should the processor take next
      */
     protected function processRowStartingNode($xmlReader)
@@ -217,7 +217,7 @@ class RowIterator implements IteratorInterface
     }
 
     /**
-     * @param \Box\Spout\Reader\Wrapper\XMLReader $xmlReader XMLReader object, positioned on a "<table:table-cell>" starting node
+     * @param XMLReader $xmlReader XMLReader object, positioned on a "<table:table-cell>" starting node
      * @return int A return code that indicates what action should the processor take next
      */
     protected function processCellStartingNode($xmlReader)
@@ -293,7 +293,7 @@ class RowIterator implements IteratorInterface
     }
 
     /**
-     * @param \Box\Spout\Reader\Wrapper\XMLReader $xmlReader XMLReader object, positioned on a "<table:table-row>" starting node
+     * @param XMLReader $xmlReader XMLReader object, positioned on a "<table:table-row>" starting node
      * @return int The value of "table:number-rows-repeated" attribute of the current node, or 1 if attribute missing
      */
     protected function getNumRowsRepeatedForCurrentNode($xmlReader)
@@ -304,7 +304,7 @@ class RowIterator implements IteratorInterface
     }
 
     /**
-     * @param \Box\Spout\Reader\Wrapper\XMLReader $xmlReader XMLReader object, positioned on a "<table:table-cell>" starting node
+     * @param XMLReader $xmlReader XMLReader object, positioned on a "<table:table-cell>" starting node
      * @return int The value of "table:number-columns-repeated" attribute of the current node, or 1 if attribute missing
      */
     protected function getNumColumnsRepeatedForCurrentNode($xmlReader)
@@ -346,8 +346,8 @@ class RowIterator implements IteratorInterface
     protected function isEmptyRow($currentRow, $lastReadCell)
     {
         return (
-            $this->rowManager->isEmpty($currentRow) &&
-            (!isset($lastReadCell) || $lastReadCell->isEmpty())
+            $this->rowManager->isEmpty($currentRow)
+            && (!isset($lastReadCell) || $lastReadCell->isEmpty())
         );
     }
 

@@ -9,7 +9,7 @@ use Box\Spout\Reader\SheetInterface;
  */
 class Sheet implements SheetInterface
 {
-    /** @var \Box\Spout\Reader\CSV\RowIterator To iterate over the CSV's rows */
+    /** @var RowIterator To iterate over the CSV's rows */
     protected $rowIterator;
 
     /**
@@ -21,7 +21,7 @@ class Sheet implements SheetInterface
     }
 
     /**
-     * @return \Box\Spout\Reader\CSV\RowIterator
+     * @return RowIterator
      */
     public function getRowIterator()
     {

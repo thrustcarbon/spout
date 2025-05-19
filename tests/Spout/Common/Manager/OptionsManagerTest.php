@@ -16,7 +16,7 @@ class OptionsManagerTest extends TestCase
 
     protected function setUp() : void
     {
-        $this->optionsManager = new class() extends OptionsManagerAbstract {
+        $this->optionsManager = new class extends OptionsManagerAbstract {
             protected function getSupportedOptions()
             {
                 return [

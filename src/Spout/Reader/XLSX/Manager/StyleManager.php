@@ -239,8 +239,8 @@ class StyleManager
             $formatCode = $this->getFormatCodeForNumFmtId($numFmtId);
 
             $this->numFmtIdToIsDateFormatCache[$numFmtId] = (
-                $this->isNumFmtIdBuiltInDateFormat($numFmtId) ||
-                $this->isFormatCodeCustomDateFormat($formatCode)
+                $this->isNumFmtIdBuiltInDateFormat($numFmtId)
+                || $this->isFormatCodeCustomDateFormat($formatCode)
             );
         }
 

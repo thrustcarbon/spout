@@ -119,7 +119,7 @@ class XMLReader extends \XMLReader
      * @throws \Box\Spout\Reader\Exception\XMLProcessingException If an error/warning occurred
      * @return bool TRUE on success or FALSE on failure
      */
-    public function next(?string $name = null): bool
+    public function next(?string $name = null) : bool
     {
         $this->useXMLInternalErrors();
 

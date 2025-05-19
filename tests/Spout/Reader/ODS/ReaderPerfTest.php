@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
  * Class ReaderPerfTest
  * Performance tests for ODS Reader
  */
-class ReaderPerfTest extends Testcase
+class ReaderPerfTest extends TestCase
 {
     use TestUsingResource;
 

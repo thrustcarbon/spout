@@ -22,7 +22,7 @@ abstract class ReaderAbstract implements ReaderInterface
     /** @var InternalEntityFactoryInterface Factory to create entities */
     protected $entityFactory;
 
-    /** @var \Box\Spout\Common\Helper\GlobalFunctionsHelper Helper to work with global functions */
+    /** @var GlobalFunctionsHelper Helper to work with global functions */
     protected $globalFunctionsHelper;
 
     /** @var OptionsManagerInterface Writer options manager */
@@ -65,7 +65,7 @@ abstract class ReaderAbstract implements ReaderInterface
     public function __construct(
         OptionsManagerInterface $optionsManager,
         GlobalFunctionsHelper $globalFunctionsHelper,
-        InternalEntityFactoryInterface $entityFactory
+        InternalEntityFactoryInterface $entityFactory,
     ) {
         $this->optionsManager = $optionsManager;
         $this->globalFunctionsHelper = $globalFunctionsHelper;
@@ -103,7 +103,7 @@ abstract class ReaderAbstract implements ReaderInterface
      * that the file exists and is readable.
      *
      * @param  string $filePath Path of the file to be read
-     * @throws \Box\Spout\Common\Exception\IOException If the file at the given path does not exist, is not readable or is corrupted
+     * @throws IOException If the file at the given path does not exist, is not readable or is corrupted
      * @return void
      */
     public function open($filePath)
@@ -210,7 +210,7 @@ abstract class ReaderAbstract implements ReaderInterface
     /**
      * Returns an iterator to iterate over sheets.
      *
-     * @throws \Box\Spout\Reader\Exception\ReaderNotOpenedException If called before opening the reader
+     * @throws ReaderNotOpenedException If called before opening the reader
      * @return \Iterator To iterate over sheets
      */
     public function getSheetIterator()

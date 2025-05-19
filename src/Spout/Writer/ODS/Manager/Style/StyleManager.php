@@ -364,7 +364,7 @@ EOD;
      */
     private function getBorderXMLContent($style)
     {
-        $borders = \array_map(fn(BorderPart $borderPart) => BorderHelper::serializeBorderPart($borderPart), $style->getBorder()->getParts());
+        $borders = \array_map(fn (BorderPart $borderPart) => BorderHelper::serializeBorderPart($borderPart), $style->getBorder()->getParts());
 
         return \sprintf(' %s ', \implode(' ', $borders));
     }

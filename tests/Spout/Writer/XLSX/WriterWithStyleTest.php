@@ -26,7 +26,7 @@ class WriterWithStyleTest extends TestCase
     use TestUsingResource;
     use RowCreationHelper;
 
-    /** @var \Box\Spout\Common\Entity\Style\Style */
+    /** @var Style */
     private $defaultStyle;
 
     /**
@@ -222,7 +222,7 @@ class WriterWithStyleTest extends TestCase
         $fileName = 'test_add_row_with_numfmt.xlsx';
         $style = (new StyleBuilder())
             ->setFontBold()
-            ->setFormat('0.00')//Builtin format
+            ->setFormat('0.00')// Builtin format
             ->build();
         $style2 = (new StyleBuilder())
             ->setFontBold()
@@ -593,7 +593,7 @@ class WriterWithStyleTest extends TestCase
     /**
      * @param Row[] $allRows
      * @param string $fileName
-     * @param \Box\Spout\Common\Entity\Style\Style|null $defaultStyle
+     * @param Style|null $defaultStyle
      * @return Writer
      */
     private function writeToXLSXFileWithDefaultStyle($allRows, $fileName, $defaultStyle)

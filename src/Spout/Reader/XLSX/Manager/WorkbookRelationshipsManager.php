@@ -103,7 +103,7 @@ class WorkbookRelationshipsManager
      * Reads the workbook.xml.rels and extracts the filename associated to the different types.
      * It caches the result so that the file is read only once.
      *
-     * @throws \Box\Spout\Common\Exception\IOException If workbook.xml.rels can't be read
+     * @throws IOException If workbook.xml.rels can't be read
      * @return array
      */
     private function getWorkbookRelationships()

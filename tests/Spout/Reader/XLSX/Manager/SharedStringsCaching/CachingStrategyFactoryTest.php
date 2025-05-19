@@ -38,7 +38,7 @@ class CachingStrategyFactoryTest extends TestCase
     {
         /** @var CachingStrategyFactory|\PHPUnit\Framework\MockObject\MockObject $factoryStub */
         $factoryStub = $this
-            ->getMockBuilder(\Box\Spout\Reader\XLSX\Manager\SharedStringsCaching\CachingStrategyFactory::class)
+            ->getMockBuilder(CachingStrategyFactory::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['getMemoryLimitInKB'])
             ->getMock();
@@ -86,7 +86,7 @@ class CachingStrategyFactoryTest extends TestCase
     {
         /** @var CachingStrategyFactory|\PHPUnit\Framework\MockObject\MockObject $factoryStub */
         $factoryStub = $this
-            ->getMockBuilder(\Box\Spout\Reader\XLSX\Manager\SharedStringsCaching\CachingStrategyFactory::class)
+            ->getMockBuilder(CachingStrategyFactory::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['getMemoryLimitFromIni'])
             ->getMock();

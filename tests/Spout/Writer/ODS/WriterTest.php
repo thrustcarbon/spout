@@ -450,7 +450,7 @@ class WriterTest extends TestCase
         ]);
 
         // set the maxRowsPerSheet limit to 2
-        \ReflectionHelper::setStaticValue(\Box\Spout\Writer\ODS\Manager\WorkbookManager::class, 'maxRowsPerWorksheet', 2);
+        \ReflectionHelper::setStaticValue(Manager\WorkbookManager::class, 'maxRowsPerWorksheet', 2);
 
         $writer = $this->writeToODSFile($dataRows, $fileName, $shouldCreateSheetsAutomatically = true);
         $this->assertCount(2, $writer->getSheets(), '2 sheets should have been created.');
@@ -474,7 +474,7 @@ class WriterTest extends TestCase
         ]);
 
         // set the maxRowsPerSheet limit to 2
-        \ReflectionHelper::setStaticValue(\Box\Spout\Writer\ODS\Manager\WorkbookManager::class, 'maxRowsPerWorksheet', 2);
+        \ReflectionHelper::setStaticValue(Manager\WorkbookManager::class, 'maxRowsPerWorksheet', 2);
 
         $writer = $this->writeToODSFile($dataRows, $fileName, $shouldCreateSheetsAutomatically = false);
         $this->assertCount(1, $writer->getSheets(), 'Only 1 sheet should have been created.');

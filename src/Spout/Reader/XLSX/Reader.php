@@ -23,7 +23,7 @@ class Reader extends ReaderAbstract
     /** @var \ZipArchive */
     protected $zip;
 
-    /** @var \Box\Spout\Reader\XLSX\Manager\SharedStringsManager Manages shared strings */
+    /** @var Manager\SharedStringsManager Manages shared strings */
     protected $sharedStringsManager;
 
     /** @var SheetIterator To iterator over the XLSX sheets */
@@ -39,7 +39,7 @@ class Reader extends ReaderAbstract
         OptionsManagerInterface $optionsManager,
         GlobalFunctionsHelper $globalFunctionsHelper,
         InternalEntityFactoryInterface $entityFactory,
-        ManagerFactory $managerFactory
+        ManagerFactory $managerFactory,
     ) {
         parent::__construct($optionsManager, $globalFunctionsHelper, $entityFactory);
         $this->managerFactory = $managerFactory;
@@ -72,7 +72,7 @@ class Reader extends ReaderAbstract
      * and fetches all the available sheets.
      *
      * @param  string $filePath Path of the file to be read
-     * @throws \Box\Spout\Common\Exception\IOException If the file at the given path or its content cannot be read
+     * @throws IOException If the file at the given path or its content cannot be read
      * @throws \Box\Spout\Reader\Exception\NoSheetsFoundException If there are no sheets in the file
      * @return void
      */

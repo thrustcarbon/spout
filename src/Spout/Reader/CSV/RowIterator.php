@@ -42,13 +42,13 @@ class RowIterator implements IteratorInterface
     /** @var bool Whether empty rows should be returned or skipped */
     protected $shouldPreserveEmptyRows;
 
-    /** @var \Box\Spout\Common\Helper\EncodingHelper Helper to work with different encodings */
+    /** @var EncodingHelper Helper to work with different encodings */
     protected $encodingHelper;
 
-    /** @var \Box\Spout\Reader\CSV\Creator\InternalEntityFactory Factory to create entities */
+    /** @var InternalEntityFactory Factory to create entities */
     protected $entityFactory;
 
-    /** @var \Box\Spout\Common\Helper\GlobalFunctionsHelper Helper to work with global functions */
+    /** @var GlobalFunctionsHelper Helper to work with global functions */
     protected $globalFunctionsHelper;
 
     /**
@@ -63,7 +63,7 @@ class RowIterator implements IteratorInterface
         OptionsManagerInterface $optionsManager,
         EncodingHelper $encodingHelper,
         InternalEntityFactory $entityFactory,
-        GlobalFunctionsHelper $globalFunctionsHelper
+        GlobalFunctionsHelper $globalFunctionsHelper,
     ) {
         $this->fieldDelimiter = $optionsManager->getOption(Options::FIELD_DELIMITER);
         $this->fieldEnclosure = $optionsManager->getOption(Options::FIELD_ENCLOSURE);
@@ -143,7 +143,7 @@ class RowIterator implements IteratorInterface
 
         if ($rowData !== false) {
             // array_map will replace NULL values by empty strings
-            $rowDataBufferAsArray = array_map(fn($value) => (string) $value, $rowData);
+            $rowDataBufferAsArray = array_map(fn ($value) => (string) $value, $rowData);
             $this->rowBuffer = $this->entityFactory->createRowFromArray($rowDataBufferAsArray);
             $this->numReadRows++;
         } else {
@@ -164,8 +164,8 @@ class RowIterator implements IteratorInterface
         $isEmptyLine = $this->isEmptyLine($currentRowData);
 
         return (
-            (!$hasSuccessfullyFetchedRowData && !$hasNowReachedEndOfFile) ||
-            (!$this->shouldPreserveEmptyRows && $isEmptyLine)
+            (!$hasSuccessfullyFetchedRowData && !$hasNowReachedEndOfFile)
+            || (!$this->shouldPreserveEmptyRows && $isEmptyLine)
         );
     }
 

@@ -36,7 +36,7 @@ class Reader extends ReaderAbstract
     public function __construct(
         OptionsManagerInterface $optionsManager,
         GlobalFunctionsHelper $globalFunctionsHelper,
-        InternalEntityFactoryInterface $entityFactory
+        InternalEntityFactoryInterface $entityFactory,
     ) {
         parent::__construct($optionsManager, $globalFunctionsHelper, $entityFactory);
         $this->isRunningAtLeastPhp81 = \version_compare(PHP_VERSION, '8.1.0') >= 0;
@@ -99,7 +99,7 @@ class Reader extends ReaderAbstract
      * If setEncoding() was not called, it assumes that the file is encoded in UTF-8.
      *
      * @param  string $filePath Path of the CSV file to be read
-     * @throws \Box\Spout\Common\Exception\IOException
+     * @throws IOException
      * @return void
      */
     protected function openReader($filePath)

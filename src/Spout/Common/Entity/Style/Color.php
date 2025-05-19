@@ -49,7 +49,7 @@ abstract class Color
      * Throws an exception is the color component value is outside of bounds (0 - 255)
      *
      * @param int $colorComponent
-     * @throws \Box\Spout\Common\Exception\InvalidColorException
+     * @throws InvalidColorException
      * @return void
      */
     protected static function throwIfInvalidColorComponentValue($colorComponent)

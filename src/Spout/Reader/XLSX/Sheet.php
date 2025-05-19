@@ -22,7 +22,7 @@ class Sheet implements SheetInterface
     }
 
     /**
-     * @return \Box\Spout\Reader\XLSX\RowIterator
+     * @return RowIterator
      */
     public function getRowIterator()
     {

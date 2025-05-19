@@ -78,7 +78,7 @@ class ManagerFactory implements ManagerFactoryInterface
         OptionsManagerInterface $optionsManager,
         StyleManager $styleManager,
         StyleMerger $styleMerger,
-        SharedStringsManager $sharedStringsManager
+        SharedStringsManager $sharedStringsManager,
     ) {
         $rowManager = $this->createRowManager();
         $stringsEscaper = $this->helperFactory->createStringsEscaper();

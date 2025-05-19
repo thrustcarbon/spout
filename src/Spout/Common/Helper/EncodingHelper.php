@@ -28,7 +28,7 @@ class EncodingHelper
     protected $supportedEncodingsWithBom;
 
     /**
-     * @param \Box\Spout\Common\Helper\GlobalFunctionsHelper $globalFunctionsHelper
+     * @param GlobalFunctionsHelper $globalFunctionsHelper
      */
     public function __construct(protected $globalFunctionsHelper)
     {
@@ -90,7 +90,7 @@ class EncodingHelper
      *
      * @param string $string Non UTF-8 string to be converted
      * @param string $sourceEncoding The encoding used to encode the source string
-     * @throws \Box\Spout\Common\Exception\EncodingConversionException If conversion is not supported or if the conversion failed
+     * @throws EncodingConversionException If conversion is not supported or if the conversion failed
      * @return string The converted, UTF-8 string
      */
     public function attemptConversionToUTF8($string, $sourceEncoding)
@@ -103,7 +103,7 @@ class EncodingHelper
      *
      * @param string $string UTF-8 string to be converted
      * @param string $targetEncoding The encoding the string should be re-encoded into
-     * @throws \Box\Spout\Common\Exception\EncodingConversionException If conversion is not supported or if the conversion failed
+     * @throws EncodingConversionException If conversion is not supported or if the conversion failed
      * @return string The converted string, encoded with the given encoding
      */
     public function attemptConversionFromUTF8($string, $targetEncoding)
@@ -118,7 +118,7 @@ class EncodingHelper
      * @param string $string string to be converted
      * @param string $sourceEncoding The encoding used to encode the source string
      * @param string $targetEncoding The encoding the string should be re-encoded into
-     * @throws \Box\Spout\Common\Exception\EncodingConversionException If conversion is not supported or if the conversion failed
+     * @throws EncodingConversionException If conversion is not supported or if the conversion failed
      * @return string The converted string, encoded with the given encoding
      */
     protected function attemptConversion($string, $sourceEncoding, $targetEncoding)

@@ -20,7 +20,7 @@ interface ReaderInterface
     /**
      * Returns an iterator to iterate over sheets.
      *
-     * @throws \Box\Spout\Reader\Exception\ReaderNotOpenedException If called before opening the reader
+     * @throws Exception\ReaderNotOpenedException If called before opening the reader
      * @return \Iterator To iterate over sheets
      */
     public function getSheetIterator();

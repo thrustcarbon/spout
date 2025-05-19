@@ -85,7 +85,7 @@ class InternalEntityFactory implements InternalEntityFactoryInterface
      */
     public function createRowFromArray(array $cellValues = [])
     {
-        $cells = \array_map(fn($cellValue) => $this->createCell($cellValue), $cellValues);
+        $cells = \array_map(fn ($cellValue) => $this->createCell($cellValue), $cellValues);
 
         return $this->createRow($cells);
     }

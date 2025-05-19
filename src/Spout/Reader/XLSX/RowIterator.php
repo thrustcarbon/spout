@@ -35,16 +35,16 @@ class RowIterator implements IteratorInterface
     /** @var string Path of the sheet data XML file as in [Content_Types].xml */
     protected $sheetDataXMLFilePath;
 
-    /** @var \Box\Spout\Reader\Common\XMLProcessor Helper Object to process XML nodes */
+    /** @var XMLProcessor Helper Object to process XML nodes */
     protected $xmlProcessor;
 
-    /** @var Helper\CellValueFormatter Helper to format cell values */
+    /** @var CellValueFormatter Helper to format cell values */
     protected $cellValueFormatter;
 
-    /** @var \Box\Spout\Reader\Common\Manager\RowManager Manages rows */
+    /** @var RowManager Manages rows */
     protected $rowManager;
 
-    /** @var \Box\Spout\Reader\XLSX\Creator\InternalEntityFactory Factory to create entities */
+    /** @var InternalEntityFactory Factory to create entities */
     protected $entityFactory;
 
     /**
@@ -92,7 +92,7 @@ class RowIterator implements IteratorInterface
         XMLProcessor $xmlProcessor,
         CellValueFormatter $cellValueFormatter,
         RowManager $rowManager,
-        InternalEntityFactory $entityFactory
+        InternalEntityFactory $entityFactory,
     ) {
         $this->sheetDataXMLFilePath = $this->normalizeSheetDataXMLFilePath($sheetDataXMLFilePath);
         $this->cellValueFormatter = $cellValueFormatter;
@@ -124,7 +124,7 @@ class RowIterator implements IteratorInterface
      * The XMLReader is configured to be safe from billion laughs attack.
      * @see http://php.net/manual/en/iterator.rewind.php
      *
-     * @throws \Box\Spout\Common\Exception\IOException If the sheet data XML cannot be read
+     * @throws IOException If the sheet data XML cannot be read
      * @return void
      */
     public function rewind() : void
@@ -161,7 +161,7 @@ class RowIterator implements IteratorInterface
      * @see http://php.net/manual/en/iterator.next.php
      *
      * @throws \Box\Spout\Reader\Exception\SharedStringNotFoundException If a shared string was not found
-     * @throws \Box\Spout\Common\Exception\IOException If unable to read the sheet data XML
+     * @throws IOException If unable to read the sheet data XML
      * @return void
      */
     public function next() : void
@@ -190,15 +190,15 @@ class RowIterator implements IteratorInterface
         $hasReadAtLeastOneRow = ($this->lastRowIndexProcessed !== 0);
 
         return (
-            !$hasReadAtLeastOneRow ||
-            !$this->shouldPreserveEmptyRows ||
-            $this->lastRowIndexProcessed < $this->nextRowIndexToBeProcessed
+            !$hasReadAtLeastOneRow
+            || !$this->shouldPreserveEmptyRows
+            || $this->lastRowIndexProcessed < $this->nextRowIndexToBeProcessed
         );
     }
 
     /**
      * @throws \Box\Spout\Reader\Exception\SharedStringNotFoundException If a shared string was not found
-     * @throws \Box\Spout\Common\Exception\IOException If unable to read the sheet data XML
+     * @throws IOException If unable to read the sheet data XML
      * @return void
      */
     protected function readDataForNextRow()
@@ -215,7 +215,7 @@ class RowIterator implements IteratorInterface
     }
 
     /**
-     * @param \Box\Spout\Reader\Wrapper\XMLReader $xmlReader XMLReader object, positioned on a "<dimension>" starting node
+     * @param XMLReader $xmlReader XMLReader object, positioned on a "<dimension>" starting node
      * @return int A return code that indicates what action should the processor take next
      */
     protected function processDimensionStartingNode($xmlReader)
@@ -230,7 +230,7 @@ class RowIterator implements IteratorInterface
     }
 
     /**
-     * @param \Box\Spout\Reader\Wrapper\XMLReader $xmlReader XMLReader object, positioned on a "<row>" starting node
+     * @param XMLReader $xmlReader XMLReader object, positioned on a "<row>" starting node
      * @return int A return code that indicates what action should the processor take next
      */
     protected function processRowStartingNode($xmlReader)
@@ -256,7 +256,7 @@ class RowIterator implements IteratorInterface
     }
 
     /**
-     * @param \Box\Spout\Reader\Wrapper\XMLReader $xmlReader XMLReader object, positioned on a "<cell>" starting node
+     * @param XMLReader $xmlReader XMLReader object, positioned on a "<cell>" starting node
      * @return int A return code that indicates what action should the processor take next
      */
     protected function processCellStartingNode($xmlReader)
@@ -309,7 +309,7 @@ class RowIterator implements IteratorInterface
     }
 
     /**
-     * @param \Box\Spout\Reader\Wrapper\XMLReader $xmlReader XMLReader object, positioned on a "<row>" node
+     * @param XMLReader $xmlReader XMLReader object, positioned on a "<row>" node
      * @throws \Box\Spout\Common\Exception\InvalidArgumentException When the given cell index is invalid
      * @return int Row index
      */
@@ -324,7 +324,7 @@ class RowIterator implements IteratorInterface
     }
 
     /**
-     * @param \Box\Spout\Reader\Wrapper\XMLReader $xmlReader XMLReader object, positioned on a "<c>" node
+     * @param XMLReader $xmlReader XMLReader object, positioned on a "<c>" node
      * @throws \Box\Spout\Common\Exception\InvalidArgumentException When the given cell index is invalid
      * @return int Column index
      */
@@ -363,7 +363,7 @@ class RowIterator implements IteratorInterface
      *
      * @return Row|null
      */
-    public function current(): mixed
+    public function current() : mixed
     {
         $rowToBeProcessed = $this->rowBuffer;
 

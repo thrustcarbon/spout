@@ -50,7 +50,7 @@ abstract class WriterAbstract implements WriterInterface
     public function __construct(
         OptionsManagerInterface $optionsManager,
         GlobalFunctionsHelper $globalFunctionsHelper,
-        HelperFactory $helperFactory
+        HelperFactory $helperFactory,
     ) {
         $this->optionsManager = $optionsManager;
         $this->globalFunctionsHelper = $globalFunctionsHelper;

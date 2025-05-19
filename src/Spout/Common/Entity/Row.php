@@ -122,6 +122,6 @@ class Row
      */
     public function toArray()
     {
-        return \array_map(fn(Cell $cell) => $cell->getValue(), $this->cells);
+        return \array_map(fn (Cell $cell) => $cell->getValue(), $this->cells);
     }
 }
