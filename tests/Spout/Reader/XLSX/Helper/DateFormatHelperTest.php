@@ -12,7 +12,7 @@ class DateFormatHelperTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestToPHPDateFormat()
+    public static function dataProviderForTestToPHPDateFormat()
     {
         return [
             // Excel date format, expected PHP date format

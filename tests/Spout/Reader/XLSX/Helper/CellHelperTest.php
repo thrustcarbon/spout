@@ -13,7 +13,7 @@ class CellHelperTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestGetColumnIndexFromCellIndex()
+    public static function dataProviderForTestGetColumnIndexFromCellIndex()
     {
         return [
             ['A1', 0],

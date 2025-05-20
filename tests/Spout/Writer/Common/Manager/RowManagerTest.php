@@ -12,7 +12,7 @@ class RowManagerTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestIsEmptyRow()
+    public static function dataProviderForTestIsEmptyRow()
     {
         return [
             // cells, expected isEmpty

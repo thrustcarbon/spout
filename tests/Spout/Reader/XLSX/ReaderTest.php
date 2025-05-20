@@ -17,7 +17,7 @@ class ReaderTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestReadShouldThrowException()
+    public static function dataProviderForTestReadShouldThrowException()
     {
         return [
             ['/path/to/fake/file.xlsx'],
@@ -44,7 +44,7 @@ class ReaderTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestReadForAllWorksheets()
+    public static function dataProviderForTestReadForAllWorksheets()
     {
         return [
             ['one_sheet_with_shared_strings.xlsx', 5, 5],

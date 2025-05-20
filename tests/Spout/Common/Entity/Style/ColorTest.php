@@ -13,7 +13,7 @@ class ColorTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestRGB()
+    public static function dataProviderForTestRGB()
     {
         return [
             [0, 0, 0, Color::BLACK],
@@ -56,7 +56,7 @@ class ColorTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestRGBAInvalidColorComponents()
+    public static function dataProviderForTestRGBAInvalidColorComponents()
     {
         return [
             [-1, 0, 0],

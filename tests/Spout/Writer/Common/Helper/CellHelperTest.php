@@ -12,7 +12,7 @@ class CellHelperTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestGetColumnLettersFromColumnIndex()
+    public static function dataProviderForTestGetColumnLettersFromColumnIndex()
     {
         return [
             [0, 'A'],

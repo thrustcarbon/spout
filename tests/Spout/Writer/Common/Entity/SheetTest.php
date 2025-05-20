@@ -59,7 +59,7 @@ class SheetTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForInvalidSheetNames()
+    public static function dataProviderForInvalidSheetNames()
     {
         return [
             [null],

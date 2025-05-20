@@ -162,7 +162,7 @@ class ReaderTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestReadShouldReadEmptyFile()
+    public static function dataProviderForTestReadShouldReadEmptyFile()
     {
         return [
             ['csv_empty.csv'],
@@ -246,7 +246,7 @@ class ReaderTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestReadShouldSkipBom()
+    public static function dataProviderForTestReadShouldSkipBom()
     {
         return [
             ['csv_with_utf8_bom.csv', EncodingHelper::ENCODING_UTF8],
@@ -279,7 +279,7 @@ class ReaderTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestReadShouldSupportNonUTF8FilesWithoutBOMs()
+    public static function dataProviderForTestReadShouldSupportNonUTF8FilesWithoutBOMs()
     {
         $shouldUseIconv = true;
         $shouldNotUseIconv = false;

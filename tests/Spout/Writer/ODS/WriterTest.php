@@ -324,7 +324,7 @@ class WriterTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestAddRowShouldUseNumberColumnsRepeatedForRepeatedValues()
+    public static function dataProviderForTestAddRowShouldUseNumberColumnsRepeatedForRepeatedValues()
     {
         return [
             [['ods--11', 'ods--11', 'ods--11'], 1, 3],

@@ -16,7 +16,7 @@ class EncodingHelperTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestGetBytesOffsetToSkipBOM()
+    public static function dataProviderForTestGetBytesOffsetToSkipBOM()
     {
         return [
             ['csv_with_utf8_bom.csv', EncodingHelper::ENCODING_UTF8, 3],
@@ -49,7 +49,7 @@ class EncodingHelperTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForIconvOrMbstringUsage()
+    public static function dataProviderForIconvOrMbstringUsage()
     {
         return [
             [$shouldUseIconv = true],

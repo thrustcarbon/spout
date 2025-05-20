@@ -134,7 +134,7 @@ class StyleManagerTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForCustomDateFormats()
+    public static function dataProviderForCustomDateFormats()
     {
         return [
             // number format, expectedResult

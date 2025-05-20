@@ -63,7 +63,7 @@ class SheetIterator implements IteratorInterface
      * @throws IOException If unable to open the XML file containing sheets' data
      * @return void
      */
-    public function rewind()
+    public function rewind() : void
     {
         $this->xmlReader->close();
 
@@ -117,7 +117,7 @@ class SheetIterator implements IteratorInterface
      *
      * @return bool
      */
-    public function valid()
+    public function valid() : bool
     {
         return $this->hasFoundSheet;
     }
@@ -128,7 +128,7 @@ class SheetIterator implements IteratorInterface
      *
      * @return void
      */
-    public function next()
+    public function next() : void
     {
         $this->hasFoundSheet = $this->xmlReader->readUntilNodeFound(self::XML_NODE_TABLE);
 
@@ -143,7 +143,7 @@ class SheetIterator implements IteratorInterface
      *
      * @return Sheet
      */
-    public function current()
+    public function current() : mixed
     {
         $escapedSheetName = $this->xmlReader->getAttribute(self::XML_ATTRIBUTE_TABLE_NAME);
         $sheetName = $this->escaper->unescape($escapedSheetName);
@@ -198,7 +198,7 @@ class SheetIterator implements IteratorInterface
      *
      * @return int
      */
-    public function key()
+    public function key() : mixed
     {
         return $this->currentSheetIndex + 1;
     }
@@ -208,7 +208,7 @@ class SheetIterator implements IteratorInterface
      *
      * @return void
      */
-    public function end()
+    public function end() : void
     {
         $this->xmlReader->close();
     }

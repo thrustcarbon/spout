@@ -15,7 +15,7 @@ class CellValueFormatterTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestExcelDate()
+    public static function dataProviderForTestExcelDate()
     {
         return [
             // use 1904 dates, node value, expected date as string
@@ -116,7 +116,7 @@ class CellValueFormatterTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestFormatNumericCellValueWithNumbers()
+    public static function dataProviderForTestFormatNumericCellValueWithNumbers()
     {
         // Some test values exceed PHP_INT_MAX on 32-bit PHP. They are
         // therefore converted to as doubles automatically by PHP.
@@ -166,7 +166,7 @@ class CellValueFormatterTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestFormatStringCellValue()
+    public static function dataProviderForTestFormatStringCellValue()
     {
         return [
             ['A', 'A'],

@@ -17,7 +17,7 @@ class RowManagerTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestFillMissingIndexesWithEmptyCells()
+    public static function dataProviderForTestFillMissingIndexesWithEmptyCells()
     {
         $cell1 = new Cell(1);
         $cell3 = new Cell(3);
@@ -50,7 +50,7 @@ class RowManagerTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestIsEmptyRow()
+    public static function dataProviderForTestIsEmptyRow()
     {
         return [
             // cells, expected isEmpty

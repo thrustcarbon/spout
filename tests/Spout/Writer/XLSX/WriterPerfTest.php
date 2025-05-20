@@ -17,7 +17,7 @@ class WriterPerfTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestPerfWhenWritingOneMillionRowsXLSX()
+    public static function dataProviderForTestPerfWhenWritingOneMillionRowsXLSX()
     {
         return [
             [$shouldUseInlineStrings = true, $expectedMaxExecutionTime = 330], // 5.5 minutes in seconds

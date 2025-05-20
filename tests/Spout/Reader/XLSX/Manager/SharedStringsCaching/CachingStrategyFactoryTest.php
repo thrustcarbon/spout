@@ -13,7 +13,7 @@ class CachingStrategyFactoryTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestCreateBestCachingStrategy()
+    public static function dataProviderForTestCreateBestCachingStrategy()
     {
         return [
             [null, -1, 'FileBasedStrategy'],
@@ -58,7 +58,7 @@ class CachingStrategyFactoryTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestGetMemoryLimitInKB()
+    public static function dataProviderForTestGetMemoryLimitInKB()
     {
         return [
             ['-1', -1],

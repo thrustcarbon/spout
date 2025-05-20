@@ -12,7 +12,7 @@ class XLSXTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestEscape()
+    public static function dataProviderForTestEscape()
     {
         return [
             ['test', 'test'],
@@ -47,7 +47,7 @@ class XLSXTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestUnescape()
+    public static function dataProviderForTestUnescape()
     {
         return [
             ['test', 'test'],

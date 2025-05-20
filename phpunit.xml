@@ -1,36 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
-         bootstrap="tests/bootstrap.php"
-         colors="true"
-         convertErrorsToExceptions="false"
-         convertWarningsToExceptions="false"
-         defaultTestSuite="unit-tests"
-         verbose="false">
-
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" bootstrap="tests/bootstrap.php" colors="true" defaultTestSuite="unit-tests" cacheDirectory=".phpunit.cache">
   <php>
     <ini name="error_reporting" value="-1"/>
   </php>
-
   <testsuites>
     <testsuite name="unit-tests">
       <directory>tests/</directory>
     </testsuite>
   </testsuites>
-
   <groups>
     <exclude>
       <group>perf-tests</group>
     </exclude>
   </groups>
-
-  <coverage>
+  <source>
     <include>
       <directory suffix=".php">src/</directory>
     </include>
     <exclude>
       <directory>src/Spout/Autoloader</directory>
     </exclude>
-  </coverage>
-
+  </source>
 </phpunit>

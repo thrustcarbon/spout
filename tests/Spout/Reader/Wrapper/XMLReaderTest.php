@@ -104,7 +104,7 @@ class XMLReaderTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestFileExistsWithinZip()
+    public static function dataProviderForTestFileExistsWithinZip()
     {
         return [
             ['[Content_Types].xml', true],
@@ -136,7 +136,7 @@ class XMLReaderTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestGetRealPathURIForFileInZip()
+    public static function dataProviderForTestGetRealPathURIForFileInZip()
     {
         $tempFolder = realpath(sys_get_temp_dir());
         $tempFolderName = basename($tempFolder);
@@ -176,7 +176,7 @@ class XMLReaderTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestIsPositionedOnStartingAndEndingNode()
+    public static function dataProviderForTestIsPositionedOnStartingAndEndingNode()
     {
         return [
             ['<test></test>'], // not prefixed

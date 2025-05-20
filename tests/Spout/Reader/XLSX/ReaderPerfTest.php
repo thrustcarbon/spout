@@ -17,7 +17,7 @@ class ReaderPerfTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestPerfWhenReading300kRowsXLSX()
+    public static function dataProviderForTestPerfWhenReading300kRowsXLSX()
     {
         return [
             [$shouldUseInlineStrings = true, $expectedMaxExecutionTime = 390], // 6.5 minutes in seconds

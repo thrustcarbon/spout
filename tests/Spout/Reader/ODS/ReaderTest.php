@@ -18,7 +18,7 @@ class ReaderTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestReadShouldThrowException()
+    public static function dataProviderForTestReadShouldThrowException()
     {
         return [
             ['/path/to/fake/file.ods'],
@@ -43,7 +43,7 @@ class ReaderTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestReadForAllWorksheets()
+    public static function dataProviderForTestReadForAllWorksheets()
     {
         return [
             ['one_sheet_with_strings.ods', 2, 3],
@@ -111,7 +111,7 @@ class ReaderTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestReadWithFilesGeneratedByExternalSoftwares()
+    public static function dataProviderForTestReadWithFilesGeneratedByExternalSoftwares()
     {
         return [
             ['file_generated_by_libre_office.ods', true],

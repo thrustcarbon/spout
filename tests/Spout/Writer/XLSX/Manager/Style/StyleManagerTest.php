@@ -12,7 +12,7 @@ class StyleManagerTest extends TestCase
     /**
      * @return array
      */
-    public function dataProviderForTestShouldApplyStyleOnEmptyCell()
+    public static function dataProviderForTestShouldApplyStyleOnEmptyCell()
     {
         return [
             // fillId, borderId, expected result
